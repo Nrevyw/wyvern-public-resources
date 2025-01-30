@@ -1,10 +1,10 @@
 # Visualizing Wyvern Data
 
-To follow along with this tutorial, visit the knowledge base here:
+To follow along with this tutorial, visit the knowledge base here: https://knowledge.wyvern.space/#/using_wyvern_data/python/python.md
 
 ## Setting Up Your Environment
 
-1. Install anaconda (or miniconda/other variants; when in doubt, install anaconda)
+1. Install [anaconda](https://www.anaconda.com/) (or miniconda/other variants; when in doubt, install anaconda)
 2. Create an environment for this project by running the command: `conda env create -f environment.yml`.
 This will create an environment named `wyvern_viz_env` and install the required packages to ensure all
 code in this folder runs correctly.

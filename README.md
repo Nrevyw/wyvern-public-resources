@@ -13,6 +13,7 @@ Public repository for tutorials, examples, and useful tools for working with Wyv
 - [Visualizing Wyvern Data](visualizing-wyvern-data/README.md): Resources for visualizing Wyvern imagery & pixel spectra using Python
   - [🖼️ Plotting Wyvern Data](visualizing-wyvern-data/visualizing_wyvern_data.ipynb)
   - [📈 Scatter and Spectral Plots with Wyvern Data](visualizing-wyvern-data/spectra_and_scatter_plots.ipynb)
+- [🌈 Relative Spectral Responses](relative-spectral-responses/README.md): Relative Spectral Response (RSR) curves for Wyvern's satellites
 
 # More
 

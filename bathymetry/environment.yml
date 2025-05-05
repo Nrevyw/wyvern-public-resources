@@ -1,0 +1,23 @@
+name: wyv_bathy_env
+channels:
+  - conda-forge
+dependencies:
+  # ACOLITE Requirements
+  - python=3
+  - pyresample
+  - cartopy
+  - scipy
+  - numpy
+  - pyhdf
+  - gdal
+  - libgdal-jp2openjpeg
+  - libgdal-netcdf
+  - netcdf4
+  - h5py
+  - pygrib
+  - requests
+  - matplotlib
+  - scikit-image
+  - pyproj
+  # Project Requirements
+  - arosics>=1.3.0

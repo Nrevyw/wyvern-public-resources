@@ -1,5 +1,10 @@
 # Satellite Derived Bathymetry with the Dragonette Constellation
 
+> [!CAUTION]
+> Final adjustments and additions are still being made on this code.
+> It is not particularly clean yet, please be advised that I'm still
+> working on it :).
+
 Presented at JACIE 2025 and Living Planet Symposium 2025
 
 **Authors:** Ellie Jones, Chad Bryant

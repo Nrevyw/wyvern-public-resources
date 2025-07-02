@@ -1,0 +1,11 @@
+{
+"type": "FeatureCollection",
+"name": "wyvern_dragonette-001_20250101T201001_5dc97ba2_validation",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::32604" } },
+"features": [
+{ "type": "Feature", "properties": { }, "geometry": null },
+{ "type": "Feature", "properties": { }, "geometry": null },
+{ "type": "Feature", "properties": { }, "geometry": null },
+{ "type": "Feature", "properties": { }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 697142.143316900474019, 2331815.390570188872516 ], [ 697142.143316900474019, 2334548.335842104163021 ], [ 700761.731138864532113, 2334548.335842104163021 ], [ 700761.731138864532113, 2331815.390570188872516 ], [ 697142.143316900474019, 2331815.390570188872516 ] ] ] } }
+]
+}

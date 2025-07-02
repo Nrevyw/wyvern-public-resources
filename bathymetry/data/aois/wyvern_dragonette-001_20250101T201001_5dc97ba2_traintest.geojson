@@ -1,0 +1,10 @@
+{
+"type": "FeatureCollection",
+"name": "wyvern_dragonette-001_20250101T201001_5dc97ba2_traintest",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::32604" } },
+"features": [
+{ "type": "Feature", "properties": { }, "geometry": { "type": "Polygon", "coordinates": [ ] } },
+{ "type": "Feature", "properties": { }, "geometry": { "type": "Polygon", "coordinates": [ ] } },
+{ "type": "Feature", "properties": { }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 697047.635680679348297, 2328241.661782806739211 ], [ 696956.112492716987617, 2334490.055241608060896 ], [ 705851.116849112790078, 2334620.514017431531101 ], [ 705942.649006477091461, 2328371.787609713152051 ], [ 697047.635680679348297, 2328241.661782806739211 ] ] ] } }
+]
+}

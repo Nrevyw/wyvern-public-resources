@@ -1,0 +1,14 @@
+{
+"type": "FeatureCollection",
+"name": "wyvern_dragonette-003_20241206T203812_64e116d6_validation",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::32604" } },
+"features": [
+{ "type": "Feature", "properties": { }, "geometry": { "type": "Polygon", "coordinates": [ ] } },
+{ "type": "Feature", "properties": { }, "geometry": { "type": "Polygon", "coordinates": [ ] } },
+{ "type": "Feature", "properties": { }, "geometry": { "type": "Polygon", "coordinates": [ ] } },
+{ "type": "Feature", "properties": { }, "geometry": { "type": "Polygon", "coordinates": [ ] } },
+{ "type": "Feature", "properties": { }, "geometry": { "type": "Polygon", "coordinates": [ ] } },
+{ "type": "Feature", "properties": { }, "geometry": { "type": "Polygon", "coordinates": [ ] } },
+{ "type": "Feature", "properties": { }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 761497.54632300324738, 2290355.840466902125627 ], [ 761432.190981859574094, 2294889.754343510139734 ], [ 766672.157875336939469, 2294965.359934315551072 ], [ 766737.517536647268571, 2290431.303410226479173 ], [ 761497.54632300324738, 2290355.840466902125627 ] ] ] } }
+]
+}

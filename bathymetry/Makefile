@@ -51,3 +51,28 @@ install-dependencies:  ## Installs ACOLITE and AROSICS
 		cd ${ACOLITE_PATH} && git clone "https://github.com/acolite/acolite.git" ./;\
 	fi
 
+download-soest:  ## Downloads and processes SOEST Hawaii Bathymetry Data to local data directory
+	@echo "${TARGET_COLOR}Downloading SOEST Hawaii Bathymetry Data! This may take a long time!${RESET}"
+	@curl -L "https://www.soest.hawaii.edu/hmrg/multibeam/all_Hawaii/hawaii_bty_5m.zip" -o data/hawaii_bty_5m.zip
+	@echo "${TARGET_COLOR}Unzipping Hawaii Bathymetry Data...${RESET}"
+	@unzip -o data/hawaii_bty_5m.zip -d data/hawaii_bty_grid
+	@echo "${TARGET_COLOR}Removing Hawaii bathymetry zip file...${RESET}"
+	@rm data/hawaii_bty_5m.zip
+	@echo "${TARGET_COLOR}Converting ArcGrid to GeoTIFF...${RESET}"
+	@gdal_translate data/hawaii_bty_grid/hawaii_bty_5m data/hawaii_bty_grid/hawaii_bty_5m.tif -co "COMPRESS=LZW" -co "BIGTIFF=YES"
+	@echo "{$TARGET_COLOR}Removing ArcGrid files...${RESET}"
+	@rm -rf data/hawaii_bty_grid/hawaii_bty_5m/
+	@echo "{$TARGET_COLOR}SOEST Download & processing complete!${RESET}"
+
+process-datasets:
+	@echo "${TARGET_COLOR}Downloading & pre-processing datasets...${RESET}"
+	@python scripts/image_processing/main.py
+
+run-experiments:  ## Runs experiments on the processed datasets
+	@echo "${TARGET_COLOR}Running experiments...${RESET}"
+	@python scripts/ml_funcs.py
+
+setup:
+	build-env
+	install-dependencies
+

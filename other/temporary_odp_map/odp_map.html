@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Wyvern Open Data Map</title>
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <style>
+    body { margin: 0; padding: 0; }
+    #map { position: absolute; top: 0; bottom: 0; width: 100vw; height: 100vh; }
+    .mapboxgl-popup-content button {
+      background: #3b26f9; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer;
+    }
+    .mapboxgl-popup-content button:hover {
+      background: #301fd0;
+    }
+    #logo-container {
+      position: absolute;
+      top: 32px;
+      left: 32px;
+      z-index: 20;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: rgb(255, 255, 255);
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.13);
+      padding: 18px 40px 14px 40px;
+      border: 1px solid #eee;
+      min-width: 180px;
+    }
+    #logo-container:hover {
+      background: rgb(251, 251, 251);
+      box-shadow: 0 4px 18px rgba(24,73,163,0.15);
+    }
+    #center-logo {
+      width: 200px;
+      object-fit: contain;
+      cursor: pointer;
+      display: block;
+      margin-bottom: 8px;
+    }
+    #center-logo:active {
+      box-shadow: 0 2px 18px rgba(24,73,163,0.20);
+    }
+    #center-logo-text {
+      font-size: 1.25em;
+      font-weight: 500;
+      color: #000;
+      text-align: center;
+      letter-spacing: 0.5px;
+      margin: 0;
+      user-select: none;
+      font-family: "Roboto", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: <weight>;
+      font-style: normal;
+      font-variation-settings:
+       "wdth" 100;
+    }
+    @media (max-width: 600px) {
+      #logo-container {
+        min-width: 120px;
+        padding: 12px 20px 10px 20px;
+      }
+      #center-logo {
+        height: 54px;
+        width: 54px;
+      }
+      #center-logo-text {
+        font-size: 1em;
+      }
+    }
+  </style>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="https://knowledge.wyvern.space/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://knowledge.wyvern.space/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://knowledge.wyvern.space/images/favicon-16x16.png">
+  <meta name="msapplication-TileImage" content="https://knowledge.wyvern.space/images/android-chrome-512x512.png">
+</head>
+<body>
+<div id="map"></div>
+<div id="logo-container">
+  <img id="center-logo" src="https://knowledge.wyvern.space/images/wyvern_logo_horizontal_tagline.png" alt="Wyvern Logo" onclick="window.open('https://opendata.wyvern.space/', '_blank')" />
+  <div id="center-logo-text">Open Data Program</div>
+</div>
+<script>
+  mapboxgl.accessToken = 'pk.eyJ1Ijoid3l2ZXJuZGV2ZWxvcGVycyIsImEiOiJjbWU4cG92dnQwaTNwMmpwd3B3NXJ0bGR2In0.KxjqgZ71F8GOzLUJS8XZmg';
+  const geojsonUrl = 'https://raw.githubusercontent.com/Nrevyw/wyvern-public-resources/refs/heads/add-temporary-odp-map/other/temporary_odp_map/wyvern_odp.geojson';
+
+  const map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/light-v11',
+    center: [0, 0],
+    zoom: 2
+  });
+
+  map.on('load', () => {
+    fetch(geojsonUrl)
+      .then(response => response.json())
+      .then(data => {
+        map.addSource('polygons', {
+          type: 'geojson',
+          data: data
+        });
+        map.addLayer({
+          id: 'polygon-layer',
+          type: 'fill',
+          source: 'polygons',
+          paint: {
+            'fill-color': '#3b26f9',
+            'fill-opacity': 0.5
+          }
+        });
+        map.addLayer({
+          id: 'polygon-outline',
+          type: 'line',
+          source: 'polygons',
+          paint: {
+            'line-color': '#000',
+            'line-width': 2
+          }
+        });
+
+        // Zoom to bounds for all features
+        function fitMapToGeojson(geojson) {
+          const bounds = new mapboxgl.LngLatBounds();
+          geojson.features.forEach(feature => {
+            function addCoords(arr) {
+              if (Array.isArray(arr[0])) {
+                arr.forEach(addCoords);
+              } else {
+                bounds.extend(arr);
+              }
+            }
+            addCoords(feature.geometry.coordinates);
+          });
+          if (!bounds.isEmpty()) {
+            map.fitBounds(bounds, { padding: 60 });
+          }
+        }
+        fitMapToGeojson(data);
+
+        // Polygon click events
+        map.on('click', 'polygon-layer', (e) => {
+          const feature = e.features[0];
+          const { id, satellite, name, url } = feature.properties;
+          const popupHtml = `
+            <strong>${name}</strong><br>
+            Satellite: ${satellite}<br>
+            ID: ${id}<br>
+            <button onclick="window.open('${url}', '_blank')">Go to Image</button>
+          `;
+          new mapboxgl.Popup()
+            .setLngLat(e.lngLat)
+            .setHTML(popupHtml)
+            .addTo(map);
+        });
+
+        map.on('mouseenter', 'polygon-layer', () => {
+          map.getCanvas().style.cursor = 'pointer';
+        });
+        map.on('mouseleave', 'polygon-layer', () => {
+          map.getCanvas().style.cursor = '';
+        });
+      });
+  });
+</script>
+</body>
+</html>

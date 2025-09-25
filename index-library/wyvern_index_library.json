@@ -7,16 +7,16 @@
     "equation": "(NIR - Red) / (NIR + Red)",
     "latex_equation": "\\frac{\\mathrm{NIR}-\\mathrm{Red}}{\\mathrm{NIR}+\\mathrm{Red}}",
     "band_mappings": {
-      "Dragonette-1": {
+      "Standard VNIR": {
         "Red": { "band_index": 12, "cwl_nm": 660, "fwhm_nm": 26.4, "approximate_match": false },
         "NIR": { "band_index": 23, "cwl_nm": 799, "fwhm_nm": 32.0, "approximate_match": false }
       },
-      "Dragonette-2/3/4": {
+      "Extended VNIR": {
         "Red": { "band_index": 16, "cwl_nm": 660, "fwhm_nm": 23.1, "approximate_match": false },
         "NIR": { "band_index": 27, "cwl_nm": 800, "fwhm_nm": 28.0, "approximate_match": false }
       }
     },
-    "compatible_satellites": ["Dragonette-1", "Dragonette-2/3/4"],
+    "compatible_satellites": ["Standard VNIR", "Extended VNIR"],
     "approximate_match": false,
     "citations": [
       { "paper": "Monitoring vegetation systems in the Great Plains with ERTS", "authors": "Rouse J.W. et al. (1973)", "doi": null, "link": "https://www.indexdatabase.de/db/i-single.php?id=58" }
@@ -30,16 +30,16 @@
     "equation": "NIR / Red",
     "latex_equation": "\\frac{\\mathrm{NIR}}{\\mathrm{Red}}",
     "band_mappings": {
-      "Dragonette-1": {
+      "Standard VNIR": {
         "Red": { "band_index": 14, "cwl_nm": 679, "fwhm_nm": 27.2, "approximate_match": false },
         "NIR": { "band_index": 20, "cwl_nm": 745, "fwhm_nm": 30.0, "approximate_match": false }
       },
-      "Dragonette-2/3/4": {
+      "Extended VNIR": {
         "Red": { "band_index": 18, "cwl_nm": 680, "fwhm_nm": 23.8, "approximate_match": false },
         "NIR": { "band_index": 24, "cwl_nm": 750, "fwhm_nm": 26.3, "approximate_match": false }
       }
     },
-    "compatible_satellites": ["Dragonette-1","Dragonette-2/3/4"],
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
     "approximate_match": false,
     "citations": [
       { "paper": "Measuring the color of growing turf with a reflectance spectrophotometer", "authors": "Birth G.S., McVey G.R. (1968)", "doi": "10.2134/agronj1968.00021962006000060016x", "link": "https://acsess.onlinelibrary.wiley.com/doi/10.2134/agronj1968.00021962006000060016x" }
@@ -53,13 +53,13 @@
     "equation": "2.5 * (NIR - Red) / (NIR + 6*Red - 7.5*Blue + 1)",
     "latex_equation": "2.5\\,\\frac{\\mathrm{NIR}-\\mathrm{Red}}{\\mathrm{NIR}+6\\mathrm{Red}-7.5\\mathrm{Blue}+1}",
     "band_mappings": {
-      "Dragonette-2/3/4": {
+      "Extended VNIR": {
         "Blue": { "band_index": 3, "cwl_nm": 480, "fwhm_nm": 16.8, "approximate_match": false },
         "Red": { "band_index": 16, "cwl_nm": 660, "fwhm_nm": 23.1, "approximate_match": false },
         "NIR": { "band_index": 27, "cwl_nm": 800, "fwhm_nm": 28.0, "approximate_match": false }
       }
     },
-    "compatible_satellites": ["Dragonette-2/3/4"],
+    "compatible_satellites": ["Extended VNIR"],
     "approximate_match": false,
     "citations": [
       { "paper": "Overview of the radiometric and biophysical performance of the MODIS vegetation indices", "authors": "Huete A. et al. (2002)", "doi": "10.1016/S0034-4257(02)00096-2", "link": "https://www.indexdatabase.de/db/i-single.php?id=16" }
@@ -73,16 +73,16 @@
     "equation": "2.5 * (NIR - Red) / (NIR + 2.4*Red + 1)",
     "latex_equation": "2.5\\,\\frac{\\mathrm{NIR}-\\mathrm{Red}}{\\mathrm{NIR}+2.4\\mathrm{Red}+1}",
     "band_mappings": {
-      "Dragonette-1": {
+      "Standard VNIR": {
         "Red": { "band_index": 12, "cwl_nm": 660, "fwhm_nm": 26.4, "approximate_match": false },
         "NIR": { "band_index": 23, "cwl_nm": 799, "fwhm_nm": 32.0, "approximate_match": false }
       },
-      "Dragonette-2/3/4": {
+      "Extended VNIR": {
         "Red": { "band_index": 16, "cwl_nm": 660, "fwhm_nm": 23.1, "approximate_match": false },
         "NIR": { "band_index": 27, "cwl_nm": 800, "fwhm_nm": 28.0, "approximate_match": false }
       }
     },
-    "compatible_satellites": ["Dragonette-1","Dragonette-2/3/4"],
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
     "approximate_match": false,
     "citations": [
       { "paper": "Development of a two-band Enhanced Vegetation Index without a blue band", "authors": "Jiang Z. et al. (2008)", "doi": "10.1016/j.rse.2008.06.006", "link": "https://www.indexdatabase.de/db/i-single.php?id=576" }
@@ -96,13 +96,13 @@
     "equation": "(NIR - Red - y(Red - Blue)) / (NIR + Red - y(Red + Blue))",
     "latex_equation": "\\frac{\\mathrm{NIR} - \\mathrm{Red} - y(\\mathrm{Red}-\\mathrm{Blue})}{\\mathrm{NIR} + \\mathrm{Red} - y(\\mathrm{Red}+\\mathrm{Blue})}",
     "band_mappings": {
-      "Dragonette-2/3/4": {
+      "Extended VNIR": {
         "Blue": { "band_index": 3, "cwl_nm": 480, "fwhm_nm": 16.8, "approximate_match": false },
         "Red": { "band_index": 16, "cwl_nm": 660, "fwhm_nm": 23.1, "approximate_match": false },
         "NIR": { "band_index": 27, "cwl_nm": 800, "fwhm_nm": 28.0, "approximate_match": false }
       }
     },
-    "compatible_satellites": ["Dragonette-2/3/4"],
+    "compatible_satellites": ["Extended VNIR"],
     "approximate_match": false,
     "citations": [
       { "paper": "Atmospherically resistant vegetation index (ARVI) for EOS-MODIS", "authors": "Kaufman Y.J., Tanre D. (1992)", "doi": "10.1109/36.134076", "link": "https://www.indexdatabase.de/db/i-single.php?id=4" }
@@ -116,16 +116,16 @@
     "equation": "((1 + L) * (NIR - Red)) / (NIR + Red + L)",
     "latex_equation": "(1 + L)\\,\\frac{\\mathrm{NIR}-\\mathrm{Red}}{\\mathrm{NIR}+\\mathrm{Red}+L}",
     "band_mappings": {
-      "Dragonette-1": {
+      "Standard VNIR": {
         "Red": { "band_index": 13, "cwl_nm": 669, "fwhm_nm": 26.8, "approximate_match": false },
         "NIR": { "band_index": 23, "cwl_nm": 799, "fwhm_nm": 32.0, "approximate_match": false }
       },
-      "Dragonette-2/3/4": {
+      "Extended VNIR": {
         "Red": { "band_index": 17, "cwl_nm": 670, "fwhm_nm": 23.5, "approximate_match": false },
         "NIR": { "band_index": 27, "cwl_nm": 800, "fwhm_nm": 28.0, "approximate_match": false }
       }
     },
-    "compatible_satellites": ["Dragonette-1","Dragonette-2/3/4"],
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
     "approximate_match": false,
     "citations": [
       { "paper": "A soil-adjusted vegetation index (SAVI)", "authors": "Huete A.R. (1988)", "doi": "10.1016/0034-4257(88)90106-X", "link": "https://www.indexdatabase.de/db/i-single.php?id=87" }
@@ -139,16 +139,16 @@
     "equation": "((1 + Y) * (NIR - Red)) / (NIR + Red + Y)",
     "latex_equation": "(1 + Y)\\,\\frac{\\mathrm{NIR}-\\mathrm{Red}}{\\mathrm{NIR}+\\mathrm{Red}+Y}",
     "band_mappings": {
-      "Dragonette-1": {
+      "Standard VNIR": {
         "Red": { "band_index": 13, "cwl_nm": 669, "fwhm_nm": 26.8, "approximate_match": false },
         "NIR": { "band_index": 23, "cwl_nm": 799, "fwhm_nm": 32.0, "approximate_match": false }
       },
-      "Dragonette-2/3/4": {
+      "Extended VNIR": {
         "Red": { "band_index": 17, "cwl_nm": 670, "fwhm_nm": 23.5, "approximate_match": false },
         "NIR": { "band_index": 27, "cwl_nm": 800, "fwhm_nm": 28.0, "approximate_match": false }
       }
     },
-    "compatible_satellites": ["Dragonette-1","Dragonette-2/3/4"],
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
     "approximate_match": false,
     "citations": [
       { "paper": "Optimization of soil-adjusted vegetation indices", "authors": "Rondeaux G. et al. (1996)", "doi": "10.1016/0034-4257(95)00186-7", "link": "https://www.indexdatabase.de/db/i-single.php?id=63" }
@@ -162,16 +162,16 @@
     "equation": "(2*NIR + 1 - sqrt((2*NIR + 1)^2 - 8*(NIR - Red)))/2",
     "latex_equation": "\\frac{2\\mathrm{NIR}+1 - \\sqrt{(2\\mathrm{NIR}+1)^2 - 8(\\mathrm{NIR}-\\mathrm{Red})}}{2}",
     "band_mappings": {
-      "Dragonette-1": {
+      "Standard VNIR": {
         "Red": { "band_index": 12, "cwl_nm": 660, "fwhm_nm": 26.4, "approximate_match": false },
         "NIR": { "band_index": 23, "cwl_nm": 799, "fwhm_nm": 32.0, "approximate_match": false }
       },
-      "Dragonette-2/3/4": {
+      "Extended VNIR": {
         "Red": { "band_index": 16, "cwl_nm": 660, "fwhm_nm": 23.1, "approximate_match": false },
         "NIR": { "band_index": 27, "cwl_nm": 800, "fwhm_nm": 28.0, "approximate_match": false }
       }
     },
-    "compatible_satellites": ["Dragonette-1","Dragonette-2/3/4"],
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
     "approximate_match": false,
     "citations": [
       { "paper": "MSAVI2: A modified soil adjusted vegetation index", "authors": "Qi J. et al. (1994)", "doi": "10.1016/0034-4257(94)90134-1", "link": "https://www.indexdatabase.de/db/i-single.php?id=44" }
@@ -185,16 +185,16 @@
     "equation": "(0.1*NIR - Red) / (0.1*NIR + Red)",
     "latex_equation": "\\frac{0.1\\mathrm{NIR}-\\mathrm{Red}}{0.1\\mathrm{NIR}+\\mathrm{Red}}",
     "band_mappings": {
-      "Dragonette-1": {
+      "Standard VNIR": {
         "Red": { "band_index": 12, "cwl_nm": 660, "fwhm_nm": 26.4, "approximate_match": false },
         "NIR": { "band_index": 23, "cwl_nm": 799, "fwhm_nm": 32.0, "approximate_match": false }
       },
-      "Dragonette-2/3/4": {
+      "Extended VNIR": {
         "Red": { "band_index": 16, "cwl_nm": 660, "fwhm_nm": 23.1, "approximate_match": false },
         "NIR": { "band_index": 27, "cwl_nm": 800, "fwhm_nm": 28.0, "approximate_match": false }
       }
     },
-    "compatible_satellites": ["Dragonette-1","Dragonette-2/3/4"],
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
     "approximate_match": false,
     "citations": [
       { "paper": "Wide Dynamic Range Vegetation Index for crop biophysical characterization", "authors": "Gitelson A.A. (2004)", "doi": "10.1078/0176-1617-01176", "link": "https://www.indexdatabase.de/db/i-single.php?id=125" }
@@ -208,16 +208,16 @@
     "equation": "(NIR - Green) / (NIR + Green)",
     "latex_equation": "\\frac{\\mathrm{NIR}-\\mathrm{Green}}{\\mathrm{NIR}+\\mathrm{Green}}",
     "band_mappings": {
-      "Dragonette-1": {
+      "Standard VNIR": {
         "Green": { "band_index": 5, "cwl_nm": 549, "fwhm_nm": 22.0, "approximate_match": false },
         "NIR": { "band_index": 23, "cwl_nm": 799, "fwhm_nm": 32.0, "approximate_match": false }
       },
-      "Dragonette-2/3/4": {
+      "Extended VNIR": {
         "Green": { "band_index": 9, "cwl_nm": 550, "fwhm_nm": 19.3, "approximate_match": false },
         "NIR": { "band_index": 27, "cwl_nm": 800, "fwhm_nm": 28.0, "approximate_match": false }
       }
     },
-    "compatible_satellites": ["Dragonette-1","Dragonette-2/3/4"],
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
     "approximate_match": false,
     "citations": [
       { "paper": "Remote estimation of chlorophyll content in higher plant leaves", "authors": "Gitelson A., Merzlyak M.N. (1998)", "doi": "10.1080/014311697217558", "link": null },
@@ -232,16 +232,16 @@
     "equation": "(NIR / Green) - 1",
     "latex_equation": "\\frac{\\mathrm{NIR}}{\\mathrm{Green}} - 1",
     "band_mappings": {
-      "Dragonette-1": {
+      "Standard VNIR": {
         "Green": { "band_index": 5, "cwl_nm": 549, "fwhm_nm": 22.0, "approximate_match": false },
         "NIR": { "band_index": 23, "cwl_nm": 799, "fwhm_nm": 32.0, "approximate_match": false }
       },
-      "Dragonette-2/3/4": {
+      "Extended VNIR": {
         "Green": { "band_index": 9, "cwl_nm": 550, "fwhm_nm": 19.3, "approximate_match": false },
         "NIR": { "band_index": 27, "cwl_nm": 800, "fwhm_nm": 28.0, "approximate_match": false }
       }
     },
-    "compatible_satellites": ["Dragonette-1","Dragonette-2/3/4"],
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
     "approximate_match": false,
     "citations": [
       { "paper": "Relationships between leaf chlorophyll and spectral reflectance", "authors": "Gitelson A.A. et al. (2003)", "doi": "10.1078/0176-1617-00887", "link": null },
@@ -256,16 +256,16 @@
     "equation": "(NIR / RE1) - 1",
     "latex_equation": "\\frac{\\mathrm{NIR}}{\\mathrm{RE1}} - 1",
     "band_mappings": {
-      "Dragonette-1": {
+      "Standard VNIR": {
         "RE1": { "band_index": 17, "cwl_nm": 711, "fwhm_nm": 28.4, "approximate_match": false },
         "NIR": { "band_index": 23, "cwl_nm": 799, "fwhm_nm": 32.0, "approximate_match": false }
       },
-      "Dragonette-2/3/4": {
+      "Extended VNIR": {
         "RE1": { "band_index": 21, "cwl_nm": 712, "fwhm_nm": 24.9, "approximate_match": false },
         "NIR": { "band_index": 27, "cwl_nm": 800, "fwhm_nm": 28.0, "approximate_match": false }
       }
     },
-    "compatible_satellites": ["Dragonette-1","Dragonette-2/3/4"],
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
     "approximate_match": false,
     "citations": [
       { "paper": "Remote estimation of leaf area index and green leaf biomass in maize canopies", "authors": "Gitelson A.A. et al. (2003)", "doi": "10.1029/2002GL016450", "link": null },
@@ -280,16 +280,16 @@
     "equation": "(NIR - RE1) / (NIR + RE1)",
     "latex_equation": "\\frac{\\mathrm{NIR}-\\mathrm{RE1}}{\\mathrm{NIR}+\\mathrm{RE1}}",
     "band_mappings": {
-      "Dragonette-1": {
+      "Standard VNIR": {
         "RE1": { "band_index": 17, "cwl_nm": 711, "fwhm_nm": 28.4, "approximate_match": false },
         "NIR": { "band_index": 23, "cwl_nm": 799, "fwhm_nm": 32.0, "approximate_match": false }
       },
-      "Dragonette-2/3/4": {
+      "Extended VNIR": {
         "RE1": { "band_index": 21, "cwl_nm": 712, "fwhm_nm": 24.9, "approximate_match": false },
         "NIR": { "band_index": 27, "cwl_nm": 800, "fwhm_nm": 28.0, "approximate_match": false }
       }
     },
-    "compatible_satellites": ["Dragonette-1","Dragonette-2/3/4"],
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
     "approximate_match": false,
     "citations": [
       { "paper": "Coincident detection of crop water stress, nitrogen status, and canopy density using ground based multispectral data", "authors": "Barnes E. et al (2000)", "doi": null, "link": "https://www.researchgate.net/publication/43256762_Coincident_detection_of_crop_water_stress_nitrogen_status_and_canopy_density_using_ground_based_multispectral_data" },
@@ -304,18 +304,18 @@
     "equation": "((NIR - RE1)/(NIR + RE1)) / ((NIR - Red)/(NIR + Red))",
     "latex_equation": "\\frac{\\frac{\\mathrm{NIR}-\\mathrm{RE1}}{\\mathrm{NIR}+\\mathrm{RE1}}}{\\frac{\\mathrm{NIR}-\\mathrm{Red}}{\\mathrm{NIR}+\\mathrm{Red}}}",
     "band_mappings": {
-      "Dragonette-1": {
+      "Standard VNIR": {
         "RE1": { "band_index": 17, "cwl_nm": 711, "fwhm_nm": 28.4, "approximate_match": false },
         "Red": { "band_index": 12, "cwl_nm": 660, "fwhm_nm": 26.4, "approximate_match": false },
         "NIR": { "band_index": 23, "cwl_nm": 799, "fwhm_nm": 32.0, "approximate_match": false }
       },
-      "Dragonette-2/3/4": {
+      "Extended VNIR": {
         "RE1": { "band_index": 21, "cwl_nm": 712, "fwhm_nm": 24.9, "approximate_match": false },
         "Red": { "band_index": 16, "cwl_nm": 660, "fwhm_nm": 23.1, "approximate_match": false },
         "NIR": { "band_index": 27, "cwl_nm": 800, "fwhm_nm": 28.0, "approximate_match": false }
       }
     },
-    "compatible_satellites": ["Dragonette-1","Dragonette-2/3/4"],
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
     "approximate_match": false,
     "citations": [
       { "paper": "Coincident detection of crop water stress, nitrogen status, and canopy density using ground based multispectral data", "authors": "Barnes E. et al (2000)", "doi": null, "link": "https://www.researchgate.net/publication/43256762_Coincident_detection_of_crop_water_stress_nitrogen_status_and_canopy_density_using_ground_based_multispectral_data" },
@@ -331,16 +331,16 @@
     "equation": "(R570 - R531) / (R570 + R531)",
     "latex_equation": "\\frac{R_{570}-R_{531}}{R_{531}+R_{531}}",
     "band_mappings": {
-      "Dragonette-1": {
+      "Standard VNIR": {
         "R531": { "band_index": 4, "cwl_nm": 535, "fwhm_nm": 21.4, "approximate_match": true },
         "R570": { "band_index": 6, "cwl_nm": 570, "fwhm_nm": 22.8, "approximate_match": false }
       },
-      "Dragonette-2/3/4": {
+      "Extended VNIR": {
         "R531": { "band_index": 8, "cwl_nm": 535, "fwhm_nm": 18.7, "approximate_match": true },
         "R570": { "band_index": 10, "cwl_nm": 570, "fwhm_nm": 20.0, "approximate_match": false }
       }
     },
-    "compatible_satellites": ["Dragonette-1","Dragonette-2/3/4"],
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
     "approximate_match": true,
     "citations": [
       { "paper": "A narrow-waveband spectral index sensitive to pigment changes", "authors": "Gamon J.A. et al. (1992)", "doi": "10.1016/0034-4257(92)90059-s", "link": null },
@@ -355,13 +355,13 @@
     "equation": "(Green - Red) / (Green + Red - Blue)",
     "latex_equation": "\\frac{\\mathrm{Green}-\\mathrm{Red}}{\\mathrm{Green}+\\mathrm{Red}-\\mathrm{Blue}}",
     "band_mappings": {
-      "Dragonette-2/3/4": {
+      "Extended VNIR": {
         "Blue": { "band_index": 3, "cwl_nm": 480, "fwhm_nm": 16.8, "approximate_match": false },
         "Green": { "band_index": 9, "cwl_nm": 550, "fwhm_nm": 19.3, "approximate_match": false },
         "Red": { "band_index": 16, "cwl_nm": 660, "fwhm_nm": 23.1, "approximate_match": false }
       }
     },
-    "compatible_satellites": ["Dragonette-2/3/4"],
+    "compatible_satellites": ["Extended VNIR"],
     "approximate_match": false,
     "citations": [
       { "paper": "Novel algorithms for remote estimation of vegetation fraction", "authors": "Gitelson A.A. et al. (2002)", "doi": "10.1016/s0034-4257(01)00289-9", "link": null },
@@ -376,16 +376,16 @@
     "equation": "(Red - NIR) / (Red + NIR)",
     "latex_equation": "\\frac{\\mathrm{Red}-\\mathrm{NIR}}{\\mathrm{Red}+\\mathrm{NIR}}",
     "band_mappings": {
-      "Dragonette-1": {
+      "Standard VNIR": {
         "Red": { "band_index": 11, "cwl_nm": 650, "fwhm_nm": 26.0, "approximate_match": false },
         "NIR": { "band_index": 23, "cwl_nm": 799, "fwhm_nm": 32.0, "approximate_match": false }
       },
-      "Dragonette-2/3/4": {
+      "Extended VNIR": {
         "Red": { "band_index": 15, "cwl_nm": 650, "fwhm_nm": 22.8, "approximate_match": false },
         "NIR": { "band_index": 27, "cwl_nm": 800, "fwhm_nm": 28.0, "approximate_match": false }
       }
     },
-    "compatible_satellites": ["Dragonette-1","Dragonette-2/3/4"],
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
     "approximate_match": false,
     "citations": [
       { "paper": "The use of the Normalized Difference Water Index (NDWI) in the delineation of open water features", "authors": "McFeeters S.K. (1996)", "doi": "10.1080/01431169608948714", "link": null }
@@ -399,16 +399,16 @@
     "equation": "(RedEdge - Red) / (RedEdge + Red)",
     "latex_equation": "\\frac{\\mathrm{RedEdge}-\\mathrm{Red}}{\\mathrm{RedEdge}+\\mathrm{Red}}",
     "band_mappings": {
-      "Dragonette-1": {
+      "Standard VNIR": {
         "Red": { "band_index": 13, "cwl_nm": 669, "fwhm_nm": 26.8, "approximate_match": false },
         "RedEdge": { "band_index": 17, "cwl_nm": 711, "fwhm_nm": 28.4, "approximate_match": false }
       },
-      "Dragonette-2/3/4": {
+      "Extended VNIR": {
         "Red": { "band_index": 16, "cwl_nm": 660, "fwhm_nm": 23.1, "approximate_match": false },
         "RedEdge": { "band_index": 21, "cwl_nm": 712, "fwhm_nm": 24.9, "approximate_match": false }
       }
     },
-    "compatible_satellites": ["Dragonette-1","Dragonette-2/3/4"],
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
     "approximate_match": false,
     "citations": [
       { "paper": "Normalized difference chlorophyll index: A novel model for remote estimation of chlorophyll-a concentration in turbid productive waters", "authors": "Mishra S.; Mishra D. (1996)", "doi": "10.1016/j.rse.2011.10.016", "link": null }
@@ -422,16 +422,16 @@
     "equation": "(Green - NIR) / (Green + NIR)",
     "latex_equation": "\\frac{\\mathrm{Green}-\\mathrm{NIR}}{\\mathrm{Green}+\\mathrm{NIR}}",
     "band_mappings": {
-      "Dragonette-1": {
+      "Standard VNIR": {
         "Green": { "band_index": 5, "cwl_nm": 549, "fwhm_nm": 22.0, "approximate_match": false },
         "NIR": { "band_index": 23, "cwl_nm": 799, "fwhm_nm": 32.0, "approximate_match": false }
       },
-      "Dragonette-2/3/4": {
+      "Extended VNIR": {
         "Green": { "band_index": 9, "cwl_nm": 550, "fwhm_nm": 19.3, "approximate_match": false },
         "NIR": { "band_index": 27, "cwl_nm": 800, "fwhm_nm": 28.0, "approximate_match": false }
       }
     },
-    "compatible_satellites": ["Dragonette-1","Dragonette-2/3/4"],
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
     "approximate_match": false,
     "citations": [
       { "paper": "The use of the Normalized Difference Water Index (NDWI) in the delineation of open water features", "authors": "McFeeters S.K. (1996)", "doi": "10.1080/01431169608948714", "link": null }
@@ -445,16 +445,16 @@
     "equation": "(R750 - R710) / (R750 + R710)",
     "latex_equation": "\\frac{R_{750}-R_{710}}{R_{750}+R_{710}}",
     "band_mappings": {
-      "Dragonette-1": {
+      "Standard VNIR": {
         "R750": { "band_index": 20, "cwl_nm": 750, "fwhm_nm": 30.0, "approximate_match": false },
         "R710": { "band_index": 17, "cwl_nm": 711, "fwhm_nm": 28.4, "approximate_match": false }
       },
-      "Dragonette-2/3/4": {
+      "Extended VNIR": {
         "R750": { "band_index": 24, "cwl_nm": 750, "fwhm_nm": 26.3, "approximate_match": false },
         "R710": { "band_index": 21, "cwl_nm": 712, "fwhm_nm": 24.9, "approximate_match": false }
       }
     },
-    "compatible_satellites": ["Dragonette-1","Dragonette-2/3/4"],
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
     "approximate_match": false,
     "citations": [
       { "paper": "Red-edge indices and chlorophyll content", "authors": "Gitelson A.; Merzlyak M.N. (1994)", "doi": "0.1016/1011-1344(93)06963-4", "link": null },
@@ -469,16 +469,16 @@
     "equation": "(R750 - R705) / (R750 + R705)",
     "latex_equation": "\\frac{R_{750}-R_{705}}{R_{750}+R_{705}}",
     "band_mappings": {
-      "Dragonette-1": {
+      "Standard VNIR": {
         "R750": { "band_index": 20, "cwl_nm": 750, "fwhm_nm": 30.0, "approximate_match": false },
         "R705": { "band_index": 16, "cwl_nm": 699, "fwhm_nm": 28.0, "approximate_match": true }
       },
-      "Dragonette-2/3/4": {
+      "Extended VNIR": {
         "R750": { "band_index": 24, "cwl_nm": 750, "fwhm_nm": 26.3, "approximate_match": false },
         "R705": { "band_index": 20, "cwl_nm": 700, "fwhm_nm": 24.5, "approximate_match": true }
       }
     },
-    "compatible_satellites": ["Dragonette-1","Dragonette-2/3/4"],
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
     "approximate_match": true,
     "citations": [
       { "paper": "Relationships Between Leaf Pigment Content and Spectral Reflectance Across a Wide Range of Species, Leaf Structures and Developmental Stages", "authors": "Sims D.A.; Gamon J. (2002)", "doi": "10.1016/S0034-4257(02)00010-X", "link": null },
@@ -493,18 +493,18 @@
     "equation": "(R754 - R709) / (R709 - R681)",
     "latex_equation": "\\frac{R_{754}-R_{709}}{R_{709}-R_{681}}",
     "band_mappings": {
-      "Dragonette-1": {
+      "Standard VNIR": {
         "R754": { "band_index": 20, "cwl_nm": 750, "fwhm_nm": 30.0, "approximate_match": false },
         "R709": { "band_index": 17, "cwl_nm": 711, "fwhm_nm": 28.4, "approximate_match": false },
         "R681": { "band_index": 14, "cwl_nm": 679, "fwhm_nm": 27.2, "approximate_match": false }
       },
-      "Dragonette-2/3/4": {
+      "Extended VNIR": {
         "R754": { "band_index": 24, "cwl_nm": 750, "fwhm_nm": 26.3, "approximate_match": false },
         "R709": { "band_index": 21, "cwl_nm": 712, "fwhm_nm": 24.9, "approximate_match": false },
         "R681": { "band_index": 18, "cwl_nm": 680, "fwhm_nm": 23.8, "approximate_match": false }
       }
     },
-    "compatible_satellites": ["Dragonette-1","Dragonette-2/3/4"],
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
     "approximate_match": false,
     "citations": [
       { "paper": "The MERIS terrestrial chlorophyll index", "authors": "Dash J., Curran P.J. (2004)", "doi": "10.1080/0143116042000274015", "link": null },
@@ -519,18 +519,18 @@
     "equation": "((R700 - R670) - 0.2*(R700 - R550)) * (R700 / R670)",
     "latex_equation": "\\left((R_{700}-R_{670}) - 0.2\\,(R_{700}-R_{550})\\right)\\left(\\frac{R_{700}}{R_{670}}\\right)",
     "band_mappings": {
-      "Dragonette-1": {
+      "Standard VNIR": {
         "R700": { "band_index": 16, "cwl_nm": 699, "fwhm_nm": 28.0, "approximate_match": false },
         "R670": { "band_index": 13, "cwl_nm": 669, "fwhm_nm": 26.8, "approximate_match": false },
         "R550": { "band_index": 5, "cwl_nm": 549, "fwhm_nm": 22.0, "approximate_match": false }
       },
-      "Dragonette-2/3/4": {
+      "Extended VNIR": {
         "R700": { "band_index": 20, "cwl_nm": 700, "fwhm_nm": 24.5, "approximate_match": false },
         "R670": { "band_index": 17, "cwl_nm": 670, "fwhm_nm": 23.5, "approximate_match": false },
         "R550": { "band_index": 9, "cwl_nm": 550, "fwhm_nm": 19.3, "approximate_match": false }
       }
     },
-    "compatible_satellites": ["Dragonette-1","Dragonette-2/3/4"],
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
     "approximate_match": false,
     "citations": [
       { "paper": "Estimating Corn Leaf Chlorophyll Concentration from Leaf and Canopy Reflectance", "authors": "Daughtry C.S.T. et al. (2000)", "doi": "10.1016/s0034-4257(00)00113-9", "link": null },
@@ -546,18 +546,18 @@
     "equation": "((1.5*(2.5*(NIR - Red) - 1.3*(NIR - Green)))) / sqrt((2*NIR + 1)^2 - (6*NIR - 5*sqrt(Red)) - 0.5)",
     "latex_equation": "\\frac{1.5\\left(2.5(\\mathrm{NIR}-\\mathrm{Red}) - 1.3(\\mathrm{NIR}-\\mathrm{Green})\\right)}{\\sqrt{(2\\mathrm{NIR}+1)^2 - (6\\mathrm{NIR} - 5\\sqrt{\\mathrm{Red}}) - 0.5}}",
     "band_mappings": {
-      "Dragonette-1": {
+      "Standard VNIR": {
         "Green": { "band_index": 5, "cwl_nm": 549, "fwhm_nm": 22.0, "approximate_match": false },
         "Red": { "band_index": 12, "cwl_nm": 660, "fwhm_nm": 26.4, "approximate_match": false },
         "NIR": { "band_index": 23, "cwl_nm": 799, "fwhm_nm": 32.0, "approximate_match": false }
       },
-      "Dragonette-2/3/4": {
+      "Extended VNIR": {
         "Green": { "band_index": 9, "cwl_nm": 550, "fwhm_nm": 19.3, "approximate_match": false },
         "Red": { "band_index": 16, "cwl_nm": 660, "fwhm_nm": 23.1, "approximate_match": false },
         "NIR": { "band_index": 27, "cwl_nm": 800, "fwhm_nm": 28.0, "approximate_match": false }
       }
     },
-    "compatible_satellites": ["Dragonette-1","Dragonette-2/3/4"],
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
     "approximate_match": false,
     "citations": [
       { "paper": "Hyperspectral vegetation indices and novel algorithms for predicting green LAI of crop canopies: Modeling and validation in the context of precision agriculture", "authors": "Haboudane D. et al. (2004)", "doi": "10.1016/j.rse.2003.12.013", "link": null },
@@ -573,18 +573,18 @@
     "equation": "3 * ((R700 - R670) - 0.2*(R700 - R550)*(R700/R670))",
     "latex_equation": "3\\left((R_{700}-R_{670}) - 0.2\\,(R_{700}-R_{550})\\,\\frac{R_{700}}{R_{670}}\\right)",
     "band_mappings": {
-      "Dragonette-1": {
+      "Standard VNIR": {
         "R700": { "band_index": 16, "cwl_nm": 699, "fwhm_nm": 28.0, "approximate_match": false },
         "R670": { "band_index": 13, "cwl_nm": 669, "fwhm_nm": 26.8, "approximate_match": false },
         "R550": { "band_index": 5, "cwl_nm": 549, "fwhm_nm": 22.0, "approximate_match": false }
       },
-      "Dragonette-2/3/4": {
+      "Extended VNIR": {
         "R700": { "band_index": 20, "cwl_nm": 700, "fwhm_nm": 24.5, "approximate_match": false },
         "R670": { "band_index": 17, "cwl_nm": 670, "fwhm_nm": 23.5, "approximate_match": false },
         "R550": { "band_index": 9, "cwl_nm": 550, "fwhm_nm": 19.3, "approximate_match": false }
       }
     },
-    "compatible_satellites": ["Dragonette-1","Dragonette-2/3/4"],
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
     "approximate_match": false,
     "citations": [
       { "paper": "Integrated narrow-band vegetation indices for prediction of crop chlorophyll content for application to precision agriculture", "authors": "Haboudane D. et al. (2002)", "doi": "doi.org/10.1016/S0034-4257(02)00018-4", "link": null },
@@ -600,14 +600,14 @@
     "equation": "(TCARI) / (OSAVI)",
     "latex_equation": "\\frac{\\mathrm{TCARI}}{\\mathrm{OSAVI}}",
     "band_mappings": {
-      "Dragonette-1": {
+      "Standard VNIR": {
         "R700": { "band_index": 16, "cwl_nm": 699, "fwhm_nm": 28.0, "approximate_match": false },
         "R670": { "band_index": 13, "cwl_nm": 669, "fwhm_nm": 26.8, "approximate_match": false },
         "R550": { "band_index": 5, "cwl_nm": 549, "fwhm_nm": 22.0, "approximate_match": false },
         "Red": { "band_index": 12, "cwl_nm": 660, "fwhm_nm": 26.4, "approximate_match": false },
         "NIR": { "band_index": 23, "cwl_nm": 799, "fwhm_nm": 32.0, "approximate_match": false }
       },
-      "Dragonette-2/3/4": {
+      "Extended VNIR": {
         "R700": { "band_index": 20, "cwl_nm": 700, "fwhm_nm": 24.5, "approximate_match": false },
         "R670": { "band_index": 17, "cwl_nm": 670, "fwhm_nm": 23.5, "approximate_match": false },
         "R550": { "band_index": 9, "cwl_nm": 550, "fwhm_nm": 19.3, "approximate_match": false },
@@ -615,7 +615,7 @@
         "NIR": { "band_index": 27, "cwl_nm": 800, "fwhm_nm": 28.0, "approximate_match": false }
       }
     },
-    "compatible_satellites": ["Dragonette-1","Dragonette-2/3/4"],
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
     "approximate_match": false,
     "citations": [
       { "paper": "Integrated narrow-band vegetation indices for prediction of crop chlorophyll content for application to precision agriculture", "authors": "Haboudane D. et al. (2002)", "doi": "10.1016/S0034-4257(02)00018-4", "link": null },
@@ -630,18 +630,18 @@
     "equation": "1.2 * (1.2*(NIR - Green) - 2.5*(Red - Green))",
     "latex_equation": "1.2(1.2(\\mathrm{NIR}-\\mathrm{Green}) - 2.5(\\mathrm{Red}-\\mathrm{Green}))",
     "band_mappings": {
-      "Dragonette-1": {
+      "Standard VNIR": {
         "Green": { "band_index": 5, "cwl_nm": 549, "fwhm_nm": 22.0, "approximate_match": false },
         "Red": { "band_index": 13, "cwl_nm": 669, "fwhm_nm": 26.8, "approximate_match": false },
         "NIR": { "band_index": 23, "cwl_nm": 799, "fwhm_nm": 32.0, "approximate_match": false }
       },
-      "Dragonette-2/3/4": {
+      "Extended VNIR": {
         "Green": { "band_index": 9, "cwl_nm": 550, "fwhm_nm": 19.3, "approximate_match": false },
         "Red": { "band_index": 17, "cwl_nm": 670, "fwhm_nm": 23.5, "approximate_match": false },
         "NIR": { "band_index": 27, "cwl_nm": 800, "fwhm_nm": 28.0, "approximate_match": false }
       }
     },
-    "compatible_satellites": ["Dragonette-1","Dragonette-2/3/4"],
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
     "approximate_match": false,
     "citations": [
       { "paper": "Hyperspectral vegetation indices and Novel Algorithms for Predicting Green LAI of crop canopies: Modeling and Validation in the Context of Precision Agriculture", "authors": "Haboudane D. et al. (2002)", "doi": "10.1016/j.rse.2003.12.013", "link": null },
@@ -657,18 +657,18 @@
     "equation": "1.5 * (1.2*(NIR - Green) - 2.5*(Red - Green)) / sqrt((2*NIR + 1)^2 - (6*NIR - 5*sqrt(Red)) - 0.5)",
     "latex_equation": "1.5\\,\\frac{1.2(\\mathrm{NIR}-\\mathrm{Green}) - 2.5(\\mathrm{Red}-\\mathrm{Green})}{\\sqrt{(2\\mathrm{NIR}+1)^2 - (6\\mathrm{NIR} - 5\\sqrt{\\mathrm{Red}}) - 0.5}}",
     "band_mappings": {
-      "Dragonette-1": {
+      "Standard VNIR": {
         "Green": { "band_index": 5, "cwl_nm": 549, "fwhm_nm": 22.0, "approximate_match": false },
         "Red": { "band_index": 13, "cwl_nm": 669, "fwhm_nm": 26.8, "approximate_match": false },
         "NIR": { "band_index": 23, "cwl_nm": 799, "fwhm_nm": 32.0, "approximate_match": false }
       },
-      "Dragonette-2/3/4": {
+      "Extended VNIR": {
         "Green": { "band_index": 9, "cwl_nm": 550, "fwhm_nm": 19.3, "approximate_match": false },
         "Red": { "band_index": 17, "cwl_nm": 670, "fwhm_nm": 23.5, "approximate_match": false },
         "NIR": { "band_index": 27, "cwl_nm": 800, "fwhm_nm": 28.0, "approximate_match": false }
       }
     },
-    "compatible_satellites": ["Dragonette-1","Dragonette-2/3/4"],
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
     "approximate_match": false,
     "citations": [
       { "paper": "Hyperspectral vegetation indices and Novel Algorithms for Predicting Green LAI of crop canopies: Modeling and Validation in the Context of Precision Agriculture", "authors": "Haboudane D. et al. (2002)", "doi": "10.1016/j.rse.2003.12.013", "link": null },
@@ -684,16 +684,16 @@
     "equation": "(NIR - Red) / sqrt(NIR + Red)",
     "latex_equation": "\\frac{\\mathrm{NIR}-\\mathrm{Red}}{\\sqrt{\\mathrm{NIR}+\\mathrm{Red}}}",
     "band_mappings": {
-      "Dragonette-1": {
+      "Standard VNIR": {
         "Red": { "band_index": 13, "cwl_nm": 669, "fwhm_nm": 26.8, "approximate_match": false },
         "NIR": { "band_index": 23, "cwl_nm": 799, "fwhm_nm": 32.0, "approximate_match": false }
       },
-      "Dragonette-2/3/4": {
+      "Extended VNIR": {
         "Red": { "band_index": 17, "cwl_nm": 670, "fwhm_nm": 23.5, "approximate_match": false },
         "NIR": { "band_index": 27, "cwl_nm": 800, "fwhm_nm": 28.0, "approximate_match": false }
       }
     },
-    "compatible_satellites": ["Dragonette-1","Dragonette-2/3/4"],
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
     "approximate_match": false,
     "citations": [
       { "paper": "Hyperspectral vegetation indices and Novel Algorithms for Predicting Green LAI of crop canopies: Modeling and Validation in the Context of Precision Agriculture", "authors": "Haboudane D. et al. (2002)", "doi": "10.1016/j.rse.2003.12.013", "link": null },
@@ -708,18 +708,18 @@
     "equation": "(R680 - R500) / R750",
     "latex_equation": "\\frac{R_{680}-R_{500}}{R_{750}}",
     "band_mappings": {
-      "Dragonette-1": {
+      "Standard VNIR": {
         "R680": { "band_index": 14, "cwl_nm": 679, "fwhm_nm": 27.2, "approximate_match": false },
         "R500": { "band_index": 1, "cwl_nm": 503, "fwhm_nm": 20.1, "approximate_match": false },
         "R750": { "band_index": 20, "cwl_nm": 750, "fwhm_nm": 30.0, "approximate_match": false }
       },
-      "Dragonette-2/3/4": {
+      "Extended VNIR": {
         "R680": { "band_index": 18, "cwl_nm": 680, "fwhm_nm": 23.8, "approximate_match": false },
         "R500": { "band_index": 5, "cwl_nm": 503, "fwhm_nm": 17.6, "approximate_match": false },
         "R750": { "band_index": 24, "cwl_nm": 750, "fwhm_nm": 26.3, "approximate_match": false }
       }
     },
-    "compatible_satellites": ["Dragonette-1","Dragonette-2/3/4"],
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
     "approximate_match": false,
     "citations": [
       { "paper": "Non-destructive optical detection of pigment changes during leaf senescence and fruit ripening", "authors": "Merzlyak M.N. et al. (1999)", "doi": "10.1034/j.1399-3054.1999.106119.x", "link": null },
@@ -735,16 +735,16 @@
     "equation": "(1 / R550) - (1 / R700)",
     "latex_equation": "\\frac{1}{R_{550}} - \\frac{1}{R_{700}}",
     "band_mappings": {
-      "Dragonette-1": {
+      "Standard VNIR": {
         "R550": { "band_index": 5, "cwl_nm": 549, "fwhm_nm": 22.0, "approximate_match": false },
         "R700": { "band_index": 16, "cwl_nm": 699, "fwhm_nm": 28.0, "approximate_match": false }
       },
-      "Dragonette-2/3/4": {
+      "Extended VNIR": {
         "R550": { "band_index": 9, "cwl_nm": 550, "fwhm_nm": 19.3, "approximate_match": false },
         "R700": { "band_index": 20, "cwl_nm": 700, "fwhm_nm": 24.5, "approximate_match": false }
       }
     },
-    "compatible_satellites": ["Dragonette-1","Dragonette-2/3/4"],
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
     "approximate_match": false,
     "citations": [
       { "paper": "Optical Properties and Nondestructive Estimation of Anthocyanin Content in Plant Leaves", "authors": "Gitelson A.A. et al. (2001)", "doi": "10.1562/0031-8655(2001)074<0038:OPANEO>2.0.CO;2", "link": null },
@@ -760,18 +760,18 @@
     "equation": "NIR * ((1 / R550) - (1 / R700))",
     "latex_equation": "\\mathrm{NIR}(\\frac{1}{R_{550}} - \\frac{1}{R_{700}})",
     "band_mappings": {
-      "Dragonette-1": {
+      "Standard VNIR": {
         "R550": { "band_index": 5, "cwl_nm": 549, "fwhm_nm": 22.0, "approximate_match": false },
         "R700": { "band_index": 16, "cwl_nm": 699, "fwhm_nm": 28.0, "approximate_match": false },
         "NIR": { "band_index": 23, "cwl_nm": 799, "fwhm_nm": 32.0, "approximate_match": false }
       },
-      "Dragonette-2/3/4": {
+      "Extended VNIR": {
         "R550": { "band_index": 9, "cwl_nm": 550, "fwhm_nm": 19.3, "approximate_match": false },
         "R700": { "band_index": 20, "cwl_nm": 700, "fwhm_nm": 24.5, "approximate_match": false },
         "NIR": { "band_index": 27, "cwl_nm": 800, "fwhm_nm": 28.0, "approximate_match": false }
       }
     },
-    "compatible_satellites": ["Dragonette-1","Dragonette-2/3/4"],
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
     "approximate_match": false,
     "citations": [
       { "paper": "Optical Properties and Nondestructive Estimation of Anthocyanin Content in Plant Leaves", "authors": "Gitelson A.A. et al. (2001)", "doi": "10.1562/0031-8655(2001)074<0038:OPANEO>2.0.CO;2", "link": null },
@@ -787,16 +787,16 @@
     "equation": "(1 / R510) - (1 / R550)",
     "latex_equation": "\\frac{1}{R_{510}} - \\frac{1}{R_{550}}",
     "band_mappings": {
-      "Dragonette-1": {
+      "Standard VNIR": {
         "R510": { "band_index": 2, "cwl_nm": 510, "fwhm_nm": 20.4, "approximate_match": false },
         "R550": { "band_index": 5, "cwl_nm": 549, "fwhm_nm": 22.0, "approximate_match": false }
       },
-      "Dragonette-2/3/4": {
+      "Extended VNIR": {
         "R510": { "band_index": 6, "cwl_nm": 510, "fwhm_nm": 17.9, "approximate_match": false },
         "R550": { "band_index": 9, "cwl_nm": 550, "fwhm_nm": 19.3, "approximate_match": false }
       }
     },
-    "compatible_satellites": ["Dragonette-1","Dragonette-2/3/4"],
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
     "approximate_match": false,
     "citations": [
       { "paper": "Assessing carotenoid content in plant leaves with reflectance spectroscopy", "authors": "Gitelson A.A. et al. (2002)", "doi": "10.1562/0031-8655(2002)075<0272:ACCIPL>2.0.CO;2", "link": null },
@@ -812,16 +812,16 @@
     "equation": "(1 / R510) - (1 / R700)",
     "latex_equation": "\\frac{1}{R_{510}} - \\frac{1}{R_{700}}",
     "band_mappings": {
-      "Dragonette-1": {
+      "Standard VNIR": {
         "R510": { "band_index": 2, "cwl_nm": 510, "fwhm_nm": 20.4, "approximate_match": false },
         "R700": { "band_index": 16, "cwl_nm": 699, "fwhm_nm": 28.0, "approximate_match": true }
       },
-      "Dragonette-2/3/4": {
+      "Extended VNIR": {
         "R510": { "band_index": 6, "cwl_nm": 510, "fwhm_nm": 17.9, "approximate_match": false },
         "R700": { "band_index": 20, "cwl_nm": 700, "fwhm_nm": 24.5, "approximate_match": false }
       }
     },
-    "compatible_satellites": ["Dragonette-1","Dragonette-2/3/4"],
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
     "approximate_match": true,
     "citations": [
       { "paper": "Assessing carotenoid content in plant leaves with reflectance spectroscopy", "authors": "Gitelson A.A. et al. (2002)", "doi": "10.1562/0031-8655(2002)075<0272:ACCIPL>2.0.CO;2", "link": null },

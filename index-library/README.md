@@ -13,16 +13,19 @@ resources, papers, and indices come out.
 ## How do I use this?
 Right now, this file will be used as the input data for our Knowledge Centre. Please go to
 [knowledge.wyvern.space/hyperspectral_library](https://knowledge.wyvern.space/hyperspectral_library) to access
-and search these indices. (Note we are in the process of releasing a new version of the Knowledge Centre. This
-page currently does not exist)
+and search these indices. 
+
+[!NOTE]
+> As of September 2025, we are in the process of releasing a new version of the Knowledge Centre. This page currently
+> does not exist, but will be coming soon.
 
 ## How to Contribute
 We welcome all contributions from the community! Feel free to create a PR, adding your indices to the
-`wyvern_index_library.json`, with some additional information within the PR:
+`wyvern_index_library.json`.  Be sure to include additional information:
 - Relevant bands. Please use [our product guide](https://guide.wyvern.space/data-product-guide/product-specifications/spectral-bands)
-for more information on our bands
-- Relevant papers and resources to include with the index. (We will only include indices that have relevant
-scientific papers attached to them)
+for more information on our bands.
+- Relevant papers and resources to include with the index. We will only include indices that have relevant
+scientific papers attached to them.
 
 ### JSON Schema
 ```json
@@ -43,7 +46,7 @@ scientific papers attached to them)
                     "type": "integer"
                 },
                 "fwhm_nm": {
-                    "description": "Full-width-half-max (FWHM) of band. I.e. bandwidth.",
+                    "description": "Full-width-half-max (FWHM) of band (i.e. bandwidth).",
                     "type": "number"
                 },
                 "approximate_match": {
@@ -66,7 +69,7 @@ scientific papers attached to them)
             "type": "string"
         },
         "categories": {
-            "description": "Array of categories. These should be high level like: vegetation, water, geology, etc.",
+            "description": "Array of categories. These should be high level (e.g. vegetation, water, geology, etc).",
             "type": "array",
             "items": {
                 "type": "string"
@@ -75,7 +78,7 @@ scientific papers attached to them)
             "uniqueItems": true
         },
         "keywords": {
-            "description": "Array of keywords. These should be focused like: chlorophyll, stress, iron, broadband, normalized difference, etc",
+            "description": "Array of keywords. These should be focused (e.g. chlorophyll, stress, iron, broadband, normalized difference, etc).",
             "type": "array",
             "items": {
                 "type": "string"
@@ -95,8 +98,8 @@ scientific papers attached to them)
             "description": "Band mapping objects for each compatible satellite",
             "type": "object",
             "properties": {
-                "Dragonette-001": {
-                    "description": "Band mapping for Dragonette-001",
+                "Standard VNIR": {
+                    "description": "Band mappings for Dragonette-001",
                     "type": "object",
                     "propertyNames": {
                         "pattern": ".*"
@@ -105,8 +108,8 @@ scientific papers attached to them)
                         "$ref": "#/$defs/hsiBand"
                     }
                 },
-                "Dragonette-2/3/4": {
-                    "description": "Band mapping for Dragonette-002/3/4/+. These satellites have the same band set.",
+                "Extended VNIR": {
+                    "description": "Band mappings for all other satellites. Every satellite except Dragonette-001 has the same band set.",
                     "type": "object",
                     "propertyNames": {
                         "pattern": ".*"

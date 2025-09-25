@@ -14,6 +14,7 @@ Public repository for tutorials, examples, and useful tools for working with Wyv
   - [🖼️ Plotting Wyvern Data](visualizing-wyvern-data/visualizing_wyvern_data.ipynb)
   - [📈 Scatter and Spectral Plots with Wyvern Data](visualizing-wyvern-data/spectra_and_scatter_plots.ipynb)
 - [🌈 Relative Spectral Responses](relative-spectral-responses/README.md): Relative Spectral Response (RSR) curves for Wyvern's satellites
+- [🔢 Index Library](index-library/README.md): Wyvern's Hyperspectral Index Library. Feel free to contribute new indices!
 
 # More
 

@@ -110,7 +110,7 @@
   },
   {
     "name": "Soil Adjusted Vegetation Index (SAVI)",
-    "description": "Minimizes soil brightness impact in sparse canopies via soil factor L. See literature for range of L values, typically 0.5.",
+    "description": "Minimizes soil brightness impact in sparse canopies via soil factor L. See literature for range of L values, typically set at 0.5.",
     "categories": ["vegetation"],
     "keywords": ["soil", "sparse vegetation"],
     "equation": "((1 + L) * (NIR - Red)) / (NIR + Red + L)",
@@ -133,7 +133,7 @@
   },
   {
     "name": "Optimized Soil Adjusted Vegetation Index (OSAVI)",
-    "description": "Vegetation index with reduced soil influence. See literature for range of Y values, typically 0.16.",
+    "description": "Vegetation index with reduced soil influence. See literature for range of Y values, typically set at 0.16.",
     "categories": ["vegetation"],
     "keywords": ["soil", "semi-arid"],
     "equation": "((1 + Y) * (NIR - Red)) / (NIR + Red + Y)",

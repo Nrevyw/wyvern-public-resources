@@ -1,0 +1,7 @@
+*.png
+*.jpg
+*.jpeg
+*.tiff
+*.tif
+*.parquet
+.ipynb_checkpoints/

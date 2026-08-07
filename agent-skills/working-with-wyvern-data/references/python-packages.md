@@ -39,20 +39,25 @@ the same detection and unmixing algorithms and is maintained.
 ## Spectral libraries: OpenSpecLib
 
 [OpenSpecLib](https://github.com/null-jones/openspeclib) (a third-party project, not
-Wyvern-maintained — pin a release tag) amalgamates USGS Spectral Library 7, ECOSTRESS,
-and EcoSIS into one schema-validated structure — ~27,000 spectra
-across minerals (2,885), vegetation (20,582), water, soil, rock, and man-made
-materials. This is the practical way to get reference spectra for target detection.
+Wyvern-maintained — hence the pinned tag below) amalgamates USGS Spectral Library 7,
+ECOSTRESS, and EcoSIS into one schema-validated structure. **v0.0.6** — the release the
+[REE notebook](https://github.com/Nrevyw/wyvern-public-resources/tree/main/tutorial-notebooks/detecting-rare-earth-elements)
+also pins — holds 32,940 spectra: 26,780 vegetation, 2,885 mineral, 1,410 water, 470
+rock, 440 man-made, 360 organic compounds. This is the practical way to get reference
+spectra for target detection.
 
 **Get the data** — download release assets directly (no install needed):
 
 ```bash
-BASE=https://github.com/null-jones/openspeclib/releases/download/v0.0.7
-curl -sLO $BASE/usgs_splib07.parquet     #  40 MB — minerals/rocks (best for detection)
+BASE=https://github.com/null-jones/openspeclib/releases/download/v0.0.6
+curl -sLO $BASE/usgs_splib07.parquet     #  38 MB — minerals/rocks (best for detection)
 curl -sLO $BASE/wavelengths.parquet      # 0.3 MB — REQUIRED: wavelength grids
-curl -sLO $BASE/ecostress.parquet        # optional
-curl -sLO $BASE/ecosis.parquet           # optional — vegetation
+curl -sLO $BASE/ecostress.parquet        #  30 MB — optional
+curl -sLO $BASE/ecosis.parquet           # 307 MB — optional; vegetation, large
 ```
+
+Pin the version. Counts, sizes and grid layout all shift between releases, so an
+unpinned URL will silently change the data underneath your analysis.
 
 Prefer the Parquet files over `openspeclib-catalog-*.json` — that catalog is a ~100 MB
 metadata index and is rarely what you want.
@@ -62,9 +67,9 @@ metadata index and is rarely what you want.
 1. Spectra store `spectral_data.values` but *not* their wavelengths. Those live in
    `wavelengths.parquet`, joined `spectral_data.wavelength_grid_id` → `grid_id` (the
    column names differ on each side).
-2. **Units are not uniform.** usgs_splib07 and ecostress grids are µm, but all 42
-   **ecosis grids are nm** — and ecosis is where the ~20,000 vegetation spectra live.
-   Read `wavelength_unit` per grid (also on each row as
+2. **Units are not uniform.** usgs_splib07 (4 grids) and ecostress (65) are µm, but
+   all 43 **ecosis grids are nm** — and ecosis is where the 26,780 vegetation spectra
+   live. Read `wavelength_unit` per grid (also on each row as
    `spectral_data.wavelength_unit`) instead of hardcoding `* 1000`.
 
 Lab fill values for bad bands are large negatives (e.g. `-1.23e34`) and must be

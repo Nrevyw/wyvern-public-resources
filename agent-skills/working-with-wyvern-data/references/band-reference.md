@@ -88,5 +88,10 @@ keys its `band_mappings` by product type: `"Standard VNIR"` and `"Extended VNIR"
 | NIR | 800 nm | 23 (799) | 27 (800) |
 | NIR (upper) | 870 nm | — (not covered) | 31 (870) |
 
+**Public-source discrepancy:** eoPortal lists Dragonette-002/003 as 32 bands to 880 nm,
+against the 31 bands to 870 nm here. This table matches Wyvern's product guide and the
+live STAC items (whose top band reports 869 nm), so prefer it — but an agent may
+encounter the other figure.
+
 Full measured relative spectral response curves per satellite:
 [`relative-spectral-responses/`](https://github.com/Nrevyw/wyvern-public-resources/tree/main/relative-spectral-responses) in this repo.

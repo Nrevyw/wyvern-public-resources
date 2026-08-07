@@ -5,6 +5,13 @@ unmix, and reduce dimensionality. Code uses `spectral` (SPy) and assumes an
 `img` array shaped `(rows, cols, bands)` of **masked, scaled surface reflectance**
 (see the main SKILL.md — mask NoData 65535 *before* applying scale 0.0001).
 
+⚠️ **SPy cannot consume that cube directly.** Wyvern scenes are rotated swaths, so a
+NoData fringe is always present. `ace`, `rx`, `mnf`, `calc_stats` and
+`noise_from_diffs` raise `NaNValueError`; worse, `spectral_angles` and `smacc` do
+**not** raise — they return corrupted or all-NaN output. Every snippet below therefore
+routes through `valid_pixels` / `scatter_scores` from
+[`scripts/spy_helpers.py`](../scripts/spy_helpers.py).
+
 ## Contents
 
 - [Choosing an approach](#choosing-an-approach)
@@ -18,15 +25,19 @@ unmix, and reduce dimensionality. Code uses `spectral` (SPy) and assumes an
 
 ## Choosing an approach
 
-The established Wyvern pipeline for material detection is **resample reference spectrum
-→ continuum removal → ACE → verify**. Resampling comes first because continuum removal
-needs the target already on the scene's band centers. Worked end to end in
-[`tutorial-notebooks/detecting-rare-earth-elements/`](https://github.com/Nrevyw/wyvern-public-resources/tree/main/tutorial-notebooks/detecting-rare-earth-elements).
-Read that notebook before building a new detection workflow.
+The core detection pipeline is **resample reference spectrum → ACE → verify**. The
+[REE notebook](https://github.com/Nrevyw/wyvern-public-resources/tree/main/tutorial-notebooks/detecting-rare-earth-elements)
+works this end to end on Dragonette-002 and is worth reading first — note it runs ACE on
+plain scaled reflectance and uses continuum removal only to *inspect* absorption
+features in plots, not as a detection step.
+
+Continuum removal before ACE is optional and needs care: it must be applied to the
+target as well, after resampling, and the end bands must be dropped (see
+[Continuum removal](#continuum-removal)).
 
 | Question | Approach |
 | --- | --- |
-| "Is material X here?" (have a reference spectrum) | **ACE** — best results on Wyvern data, and the one-call default. **MTMF** performs comparably but needs an infeasibility term SPy doesn't ship |
+| "Is material X here?" (have a reference spectrum) | **ACE** — scale-invariant, one call, and what the REE notebook uses. **MTMF** is an alternative but needs an infeasibility term SPy doesn't ship |
 | "What's unusual here?" (no reference spectrum) | **RX** anomaly detection |
 | "How much of X is in each pixel?" | Unmixing / MTMF infeasibility |
 | "What materials are present at all?" | Endmember extraction (PPI, SMACC) → unmix |
@@ -34,28 +45,31 @@ Read that notebook before building a new detection workflow.
 | "Sharpen narrow absorption features" | Continuum removal |
 | "Quick vegetation/water/moisture proxy" | A spectral index (see SKILL.md step 4) |
 
-**VNIR-only caveat.** Wyvern Dragonette covers ~445–870 nm, which decides what is
-detectable at all:
+**VNIR-only caveat.** Coverage depends on the product type — **Standard VNIR is
+503–799 nm, Extended VNIR 445–869 nm** — and that decides what is detectable at all.
+Check the scene's band count (23 vs 31) before applying this table:
 
 | Detectable in VNIR | Needs SWIR (not detectable) |
 | --- | --- |
-| Rare earth elements (Nd³⁺ has sharp VNIR absorptions) | Clays / phyllosilicates |
-| Iron oxides — **product-type dependent, see below** | Carbonates |
+| Rare earth elements — Nd³⁺ has features at 585, 745, 810 and 870 nm; Standard reaches only the first two | Clays / phyllosilicates |
+| Ferric iron — present on both, but *identifying* the oxide is limited (below) | Carbonates |
 | Vegetation pigments, chlorophyll, stress, senescence | Hydrocarbons, most alteration minerals |
-| Water constituents, chlorophyll-a, turbidity | Evaporites |
+| Water constituents, chlorophyll-a, turbidity | Evaporites, sulfates |
 
-**Iron oxides need Extended VNIR to be identified.** The Fe³⁺ crystal-field minimum
-that distinguishes hematite from goethite/jarosite sits at ~860–900 nm. Extended VNIR
-(to 870 nm) reaches it; **Standard VNIR stops at 799 nm and does not**. On a Standard
-scene all that survives is the rising ferric charge-transfer limb, which is shared by
-every iron oxide and by iron-stained anything — enough to say "ferric material may be
-present," never "this is hematite." Separate the two claims explicitly, and check the
-product type before promising either. Coarse-grained (20–250 µm) hematite is nearly
-flat in VNIR even on Extended, so a negative result does not exclude it.
+**Detecting ferric iron and *identifying* the oxide are different claims.** Fe³⁺ has a
+crystal-field band around 630–715 nm that sits inside **both** product types, so
+"ferric material is present" is a supportable statement on a Standard scene.
+
+Naming the oxide needs the longer-wavelength minimum, and that is largely out of reach:
+hematite's is ~860 nm (just inside Extended's 869 nm top band, outside Standard
+entirely) and goethite's is ~900–920 nm, beyond **both**. So Extended can support
+"minimum at or below 870 nm, hematite-like"; it cannot locate goethite's band at all.
+Coarse-grained (20–250 µm) hematite is nearly flat in VNIR regardless, so a negative
+does not exclude it.
 
 Don't over-generalize "minerals need SWIR" — REE detection in VNIR is a proven Wyvern
 workflow (see [the Mountain Pass notebook](https://github.com/Nrevyw/wyvern-public-resources/tree/main/tutorial-notebooks/detecting-rare-earth-elements)).
-But when a requested target's diagnostic features genuinely fall outside 445–870 nm,
+But when a target's diagnostic features fall outside the scene's range,
 say so plainly instead of reporting a weak score, and name an instrument that covers
 them: [EMIT](https://earth.jpl.nasa.gov/emit/) (380–2500 nm, ~60 m),
 [EnMAP](https://www.enmap.org/) or
@@ -79,8 +93,8 @@ subtle features. Convert L1B first
 
 Reference spectra come from libraries (see [python-packages.md](python-packages.md)
 for OpenSpecLib) at 1–10 nm resolution. Wyvern bands are 16–32 nm wide, so a
-reference spectrum **must be convolved onto Wyvern's band response** — naive
-interpolation over-weights narrow features and produces wrong detection scores.
+reference spectrum **must be convolved onto Wyvern's band response** (15.6–32 nm
+FWHM) — naive interpolation over-weights narrow features and produces wrong scores.
 
 ```bash
 # CSV of wavelength,reflectance -> Wyvern band values for a specific scene
@@ -114,10 +128,12 @@ residual atmospheric effects.
 
 ## Target detection
 
-**ACE (Adaptive Cosine/Coherence Estimator)** and **MTMF** give the best results on
-Wyvern imagery. ACE is scale-invariant — it responds to spectral *shape* rather than
-brightness, which makes it robust to illumination and albedo variation, and it
-normalizes against the scene's background covariance.
+**ACE (Adaptive Cosine/Coherence Estimator)** is the recommended default here because
+it is scale-invariant — it responds to spectral *shape* rather than brightness, making
+it robust to illumination and albedo variation, and it normalizes against the scene's
+background covariance. It is also what the REE notebook uses. **MTMF** is a reasonable
+alternative but needs an infeasibility term SPy doesn't ship. These are properties of
+the algorithms, not a benchmark on Wyvern data — no such comparison has been run.
 
 ```python
 import numpy as np
@@ -135,9 +151,14 @@ scenes, targets, or band counts. A max of 0.94 means "this was the best match in
 scene," which is true even when the target is absent — so a high score is never
 evidence on its own.
 
-`sp.ace` accepts a single target or a list of targets, and optional `background`
-(a `GaussianStats`) or a `window` tuple for local background estimation. A local
-window helps when the scene is heterogeneous (e.g. land + water).
+`sp.ace` accepts a single target or a list of targets and an optional `background`
+(a `GaussianStats`).
+
+⚠️ Do **not** pass `window=` alongside the `valid_pixels` column used throughout this
+file. A local window estimates background from spatial neighbours, and in an
+`(N, 1, bands)` array the "neighbours" are arbitrary raster-order pixels — it does not
+raise, it just returns meaningless scores. The same applies to `sp.rx(window=...)`.
+Local windows need a genuine NaN-free rectangle; use stratification (below) instead.
 
 **Matched Filter (MF)** is the classic alternative; it is *not* scale-invariant, so
 brightness differences leak into scores:
@@ -153,7 +174,9 @@ so compute MF on MNF-reduced data and threshold on both:
 ```python
 # MTMF is conventionally run on MNF-reduced data
 # noise_from_diffs needs a real 2-D, NaN-free, homogeneous patch (not px).
-patch = img[4:24, 4:24, :]                     # a uniform area with no NoData
+from spy_helpers import find_clean_patch
+
+patch = find_clean_patch(img)   # searches; corners of a rotated swath are NoData
 mnf_result = sp.mnf(sp.calc_stats(px), sp.noise_from_diffs(patch))
 reduced = mnf_result.reduce(px, num=15)
 target_reduced = mnf_result.get_reduction_transform(num=15)(target)
@@ -236,13 +259,14 @@ components are genuinely informative. Use it to denoise before detection, or to
 compress 31 bands to ~10–15 components.
 
 ```python
+from spy_helpers import find_clean_patch, valid_pixels
+
 px, valid = valid_pixels(img)
 signal = sp.calc_stats(px)
-# Noise must come from a 2-D, NaN-free, spatially homogeneous patch (uniform
-# water, a bare field). px is a degenerate column and yields NaN noise stats;
-# a heterogeneous patch treats real spectral variation as noise.
-patch = img[4:24, 4:24, :]
-noise = sp.noise_from_diffs(patch)
+# Noise needs a 2-D, NaN-free, spatially homogeneous patch (uniform water, a bare
+# field). Passing px raises NaNValueError; a heterogeneous patch treats real
+# spectral variation as noise and degrades everything downstream.
+noise = sp.noise_from_diffs(find_clean_patch(img))
 mnfr = sp.mnf(signal, noise)
 denoised = scatter_scores(mnfr.denoise(px, num=10), valid)
 reduced = scatter_scores(mnfr.reduce(px, num=10), valid)   # MNF space
@@ -297,16 +321,6 @@ scores = scatter_scores(sp.ace(cr[..., 1:-1], cr_target[1:-1]), valid)
 With only 23–31 broad VNIR bands, absorption features must be wide to survive
 convolution; don't expect SWIR-style diagnostic band depths.
 
-**SPy needs a NaN-free array.** Wyvern scenes are rotated swaths with large NoData
-fringes, so a clean rectangle often doesn't exist. Rather than filling NaNs, pass just
-the valid pixels reshaped to a degenerate image:
-
-```python
-valid = np.isfinite(img).all(axis=2)
-scores = np.full(valid.shape, np.nan)
-scores[valid] = sp.ace(img[valid].reshape(-1, 1, img.shape[2]), target).ravel()
-```
-
 ## Interpreting and verifying results
 
 Detection scores are **relative to the scene** — never report an absolute threshold as
@@ -331,7 +345,8 @@ if it were physically meaningful. Concretely:
    composition — the strongest single check available, and cheap.
 6. **Report uncertainty honestly**: state the product type and band count used,
    whether the target came from a lab library or the scene, and whether the
-   material's diagnostic wavelengths are inside 445–870 nm. If they aren't, the
-   result is not evidence of that material.
+   material's diagnostic wavelengths are inside **this product type's** range
+   (Standard 503–799 nm, Extended 445–869 nm). If they aren't, the result is not
+   evidence of that material.
 7. **Nothing found is a valid answer.** Say the target wasn't detected rather than
    lowering the threshold until something appears.

@@ -11,9 +11,9 @@ delivered as Cloud-Optimized GeoTIFFs with STAC metadata. The Open Data Program
 
 ## Data products at a glance
 
-Both L2A and L1B are purchasable. Open Data currently publishes L2A; an
-[L1B collection](https://wyvern-odp.com/l1b/collection.json) exists and will be
-populated later (it returns zero items today).
+Both L2A and L1B are purchasable. Open Data publishes L2A; an
+[L1B collection](https://wyvern-odp.com/l1b/collection.json) exists but returned zero
+items as of 2026-08 — re-check it rather than assuming it is still empty.
 
 | | L2A surface reflectance | L1B top-of-atmosphere radiance |
 | --- | --- | --- |

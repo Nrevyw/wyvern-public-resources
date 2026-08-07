@@ -38,8 +38,9 @@ the same detection and unmixing algorithms and is maintained.
 
 ## Spectral libraries: OpenSpecLib
 
-[OpenSpecLib](https://github.com/null-jones/openspeclib) amalgamates USGS Spectral
-Library 7, ECOSTRESS, and EcoSIS into one schema-validated structure — ~27,000 spectra
+[OpenSpecLib](https://github.com/null-jones/openspeclib) (a third-party project, not
+Wyvern-maintained — pin a release tag) amalgamates USGS Spectral Library 7, ECOSTRESS,
+and EcoSIS into one schema-validated structure — ~27,000 spectra
 across minerals (2,885), vegetation (20,582), water, soil, rock, and man-made
 materials. This is the practical way to get reference spectra for target detection.
 
@@ -56,11 +57,18 @@ curl -sLO $BASE/ecosis.parquet           # optional — vegetation
 Prefer the Parquet files over `openspeclib-catalog-*.json` — that catalog is a ~100 MB
 metadata index and is rarely what you want.
 
-**Critical schema detail:** spectra store `spectral_data.values` but *not* their
-wavelengths. Wavelengths live in `wavelengths.parquet`, joined on
-`spectral_data.wavelength_grid_id`. Wavelength units are **µm** (check
-`spectral_data.wavelength_unit`), and lab fill values for bad bands are large
-negatives (e.g. `-1.23e34`) that must be masked.
+**Two schema details that will burn you:**
+
+1. Spectra store `spectral_data.values` but *not* their wavelengths. Those live in
+   `wavelengths.parquet`, joined `spectral_data.wavelength_grid_id` → `grid_id` (the
+   column names differ on each side).
+2. **Units are not uniform.** usgs_splib07 and ecostress grids are µm, but all 42
+   **ecosis grids are nm** — and ecosis is where the ~20,000 vegetation spectra live.
+   Read `wavelength_unit` per grid (also on each row as
+   `spectral_data.wavelength_unit`) instead of hardcoding `* 1000`.
+
+Lab fill values for bad bands are large negatives (e.g. `-1.23e34`) and must be
+masked.
 
 ```python
 import pyarrow.parquet as pq

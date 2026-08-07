@@ -69,3 +69,36 @@ def scatter_scores(scores: np.ndarray, valid: np.ndarray) -> np.ndarray:
     out = np.full((*valid.shape, flat.shape[1]), np.nan)
     out[valid] = flat
     return out
+
+
+def find_clean_patch(img: np.ndarray, size: int = 20) -> np.ndarray:
+    """Find a NaN-free square window, for noise estimation.
+
+    `sp.noise_from_diffs` needs a real 2-D patch with no NoData — it raises
+    `NaNValueError` otherwise, and the degenerate column from `valid_pixels` is not
+    a substitute. Guessing a fixed slice is unreliable because Wyvern swaths are
+    rotated, so the raster corners are usually NoData.
+
+    The scan is offset-tolerant rather than block-aligned, since the only clean
+    window may straddle block boundaries.
+
+    Args:
+        img: Cube shaped (rows, cols, bands), NaN where NoData was masked.
+        size: Side length of the square window to find.
+
+    Returns:
+        The first NaN-free (size, size, bands) sub-cube found.
+
+    Raises:
+        ValueError: If no NaN-free window of that size exists. Reduce `size`, or
+            read a window over a fully-valid AOI.
+    """
+    step = max(1, size // 8)
+    for row in range(0, img.shape[0] - size + 1, step):
+        for col in range(0, img.shape[1] - size + 1, step):
+            block = img[row : row + size, col : col + size, :]
+            if np.isfinite(block).all():
+                return block
+    raise ValueError(
+        f"no NaN-free {size}x{size} patch found — reduce size or pick a valid AOI"
+    )

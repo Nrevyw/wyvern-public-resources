@@ -1,0 +1,103 @@
+# Python Packages for Wyvern Hyperspectral Analysis
+
+Recommended defaults, not an exhaustive menu. Install what the task needs.
+
+## Core stack
+
+| Package | Use | Notes |
+| --- | --- | --- |
+| `rasterio` | Read/write COGs, windowed reads, reprojection | The default for loading Wyvern imagery. GDAL-backed. |
+| `numpy` | Band math, index calculation, masking | Everything is an ndarray. |
+| `pystac` | Parse STAC items/collections | `pystac.Item.from_file(url)` works against the Open Data catalog. |
+| `pystac-client` | Query a STAC **API** | Only useful for STAC APIs; the Wyvern open-data catalog is static JSON, so walk `rel: item` links or use `scripts/wyvern_stac.py`. |
+| `requests` | HTTP fetches | Its default User-Agent avoids the CDN's 403 on Python-urllib. |
+| `shapely` + `pyproj` | AOI geometry, CRS transforms | Needed because each scene has its own UTM zone. |
+
+```bash
+pip install rasterio numpy pystac requests shapely pyproj scipy
+```
+
+## Hyperspectral-specific
+
+| Package | Use | Notes |
+| --- | --- | --- |
+| `spectral` (Spectral Python / SPy) | **Target detection (ACE, matched filter), anomaly detection (RX), SAM, MNF, PCA, endmember extraction, continuum removal** | The workhorse for the analysis in [spectral-analysis.md](spectral-analysis.md). Verified against v0.25. |
+| `scikit-learn` | Classification, clustering, dimensionality reduction | Pair with SPy for supervised workflows. |
+| `xarray` + `rioxarray` | Labeled dimensions, keeping wavelength as a coordinate | Helpful for multi-scene/time-series work. |
+| `dask` | Out-of-core processing | For scenes or stacks too large for memory. |
+| `matplotlib` | Spectral plots, index maps | |
+| `geopandas` | Vector AOIs, zonal workflows | |
+
+```bash
+pip install spectral scikit-learn matplotlib
+```
+
+**On `pysptools`:** often cited for hyperspectral work, but it fails to import on
+current Python versions (broken `detection` submodule). Prefer `spectral` — it covers
+the same detection and unmixing algorithms and is maintained.
+
+## Spectral libraries: OpenSpecLib
+
+[OpenSpecLib](https://github.com/null-jones/openspeclib) amalgamates USGS Spectral
+Library 7, ECOSTRESS, and EcoSIS into one schema-validated structure — ~27,000 spectra
+across minerals (2,885), vegetation (20,582), water, soil, rock, and man-made
+materials. This is the practical way to get reference spectra for target detection.
+
+**Get the data** — download release assets directly (no install needed):
+
+```bash
+BASE=https://github.com/null-jones/openspeclib/releases/download/v0.0.7
+curl -sLO $BASE/usgs_splib07.parquet     #  40 MB — minerals/rocks (best for detection)
+curl -sLO $BASE/wavelengths.parquet      # 0.3 MB — REQUIRED: wavelength grids
+curl -sLO $BASE/ecostress.parquet        # optional
+curl -sLO $BASE/ecosis.parquet           # optional — vegetation
+```
+
+Prefer the Parquet files over `openspeclib-catalog-*.json` — that catalog is a ~100 MB
+metadata index and is rarely what you want.
+
+**Critical schema detail:** spectra store `spectral_data.values` but *not* their
+wavelengths. Wavelengths live in `wavelengths.parquet`, joined on
+`spectral_data.wavelength_grid_id`. Wavelength units are **µm** (check
+`spectral_data.wavelength_unit`), and lab fill values for bad bands are large
+negatives (e.g. `-1.23e34`) that must be masked.
+
+```python
+import pyarrow.parquet as pq
+import numpy as np
+
+spectra = pq.read_table("usgs_splib07.parquet", columns=[
+    "name", "material.category",
+    "spectral_data.wavelength_grid_id", "spectral_data.values",
+]).to_pylist()
+
+grids = {r["grid_id"]: r for r in pq.read_table("wavelengths.parquet").to_pylist()}
+
+match = next(r for r in spectra
+             if "hematite" in r["name"].lower() and r["spectral_data.values"])
+grid = grids[match["spectral_data.wavelength_grid_id"]]
+
+wl_nm = np.array(grid["wavelengths"], float) * 1000   # µm -> nm
+refl = np.array(match["spectral_data.values"], float) # mask negatives before use
+```
+
+For ad-hoc search, DuckDB queries the Parquet in place:
+
+```sql
+SELECT id, name, "material.formula"
+FROM 'usgs_splib07.parquet'
+WHERE "material.category" = 'mineral' AND lower(name) LIKE '%hematite%';
+```
+
+There is also a no-install [browser viewer](https://null-jones.github.io/openspeclib/)
+that can search, plot, simulate Wyvern-band downsampling, and export CSV or ENVI
+`.sli` — useful for picking a target spectrum before writing code.
+
+**Always resample lab spectra to Wyvern bands** before comparing them to imagery.
+Use `scripts/resample_spectra.py` (FWHM-weighted convolution); see
+[spectral-analysis.md](spectral-analysis.md) for why this matters. The
+[REE notebook](https://github.com/Nrevyw/wyvern-public-resources/tree/main/tutorial-notebooks/detecting-rare-earth-elements) shows the
+same convolution applied to a USGS bastnaesite spectrum end to end.
+
+Note the USGS `splib07a` grid is 2151 samples at 1 nm spacing over 350–2500 nm, so a
+USGS spectrum covers Wyvern's full VNIR range with room to spare.

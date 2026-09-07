@@ -1,0 +1,3 @@
+# JSON files are ignored in other directories due to notebooks/code pulling down images (and potentially the sidecar
+# JSON files.)
+!*.json

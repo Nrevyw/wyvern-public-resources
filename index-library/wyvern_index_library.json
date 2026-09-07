@@ -1,0 +1,832 @@
+[
+  {
+    "name": "Normalized Difference Vegetation Index (NDVI)",
+    "description": "Classic broadband vegetation index contrasting red absorption with high near-infrared reflectance.",
+    "categories": ["vegetation"],
+    "keywords": ["greenness", "canopy", "vigor", "productivity", "broadband"],
+    "equation": "(NIR - Red) / (NIR + Red)",
+    "latex_equation": "\\frac{\\mathrm{NIR}-\\mathrm{Red}}{\\mathrm{NIR}+\\mathrm{Red}}",
+    "band_mappings": {
+      "Standard VNIR": {
+        "Red": { "band_index": 12, "cwl_nm": 660, "fwhm_nm": 26.4, "approximate_match": false },
+        "NIR": { "band_index": 23, "cwl_nm": 799, "fwhm_nm": 32.0, "approximate_match": false }
+      },
+      "Extended VNIR": {
+        "Red": { "band_index": 16, "cwl_nm": 660, "fwhm_nm": 23.1, "approximate_match": false },
+        "NIR": { "band_index": 27, "cwl_nm": 800, "fwhm_nm": 28.0, "approximate_match": false }
+      }
+    },
+    "compatible_satellites": ["Standard VNIR", "Extended VNIR"],
+    "approximate_match": false,
+    "citations": [
+      { "paper": "Monitoring vegetation systems in the Great Plains with ERTS", "authors": "Rouse J.W. et al. (1973)", "doi": null, "link": "https://www.indexdatabase.de/db/i-single.php?id=58" }
+    ]
+  },
+  {
+    "name": "Simple Ratio (SR)",
+    "description": "Earliest chlorophyll/biomass proxy using NIR to red reflectance ratio.",
+    "categories": ["vegetation"],
+    "keywords": ["biomass", "simple ratio", "productivity"],
+    "equation": "NIR / Red",
+    "latex_equation": "\\frac{\\mathrm{NIR}}{\\mathrm{Red}}",
+    "band_mappings": {
+      "Standard VNIR": {
+        "Red": { "band_index": 14, "cwl_nm": 679, "fwhm_nm": 27.2, "approximate_match": false },
+        "NIR": { "band_index": 20, "cwl_nm": 745, "fwhm_nm": 30.0, "approximate_match": false }
+      },
+      "Extended VNIR": {
+        "Red": { "band_index": 18, "cwl_nm": 680, "fwhm_nm": 23.8, "approximate_match": false },
+        "NIR": { "band_index": 24, "cwl_nm": 750, "fwhm_nm": 26.3, "approximate_match": false }
+      }
+    },
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
+    "approximate_match": false,
+    "citations": [
+      { "paper": "Measuring the color of growing turf with a reflectance spectrophotometer", "authors": "Birth G.S., McVey G.R. (1968)", "doi": "10.2134/agronj1968.00021962006000060016x", "link": "https://acsess.onlinelibrary.wiley.com/doi/10.2134/agronj1968.00021962006000060016x" }
+    ]
+  },
+  {
+    "name": "Enhanced Vegetation Index (EVI)",
+    "description": "Improves sensitivity in high biomass and reduces soil & atmospheric influences using a blue band.",
+    "categories": ["vegetation"],
+    "keywords": ["biomass", "canopy", "atmospheric resistance"],
+    "equation": "2.5 * (NIR - Red) / (NIR + 6*Red - 7.5*Blue + 1)",
+    "latex_equation": "2.5\\,\\frac{\\mathrm{NIR}-\\mathrm{Red}}{\\mathrm{NIR}+6\\mathrm{Red}-7.5\\mathrm{Blue}+1}",
+    "band_mappings": {
+      "Extended VNIR": {
+        "Blue": { "band_index": 3, "cwl_nm": 480, "fwhm_nm": 16.8, "approximate_match": false },
+        "Red": { "band_index": 16, "cwl_nm": 660, "fwhm_nm": 23.1, "approximate_match": false },
+        "NIR": { "band_index": 27, "cwl_nm": 800, "fwhm_nm": 28.0, "approximate_match": false }
+      }
+    },
+    "compatible_satellites": ["Extended VNIR"],
+    "approximate_match": false,
+    "citations": [
+      { "paper": "Overview of the radiometric and biophysical performance of the MODIS vegetation indices", "authors": "Huete A. et al. (2002)", "doi": "10.1016/S0034-4257(02)00096-2", "link": "https://www.indexdatabase.de/db/i-single.php?id=16" }
+    ]
+  },
+  {
+    "name": "Two-band Enhanced Vegetation Index (EVI2)",
+    "description": "EVI formulation without a blue band for sensors lacking deep blue coverage.",
+    "categories": ["vegetation"],
+    "keywords": ["biomass", "canopy"],
+    "equation": "2.5 * (NIR - Red) / (NIR + 2.4*Red + 1)",
+    "latex_equation": "2.5\\,\\frac{\\mathrm{NIR}-\\mathrm{Red}}{\\mathrm{NIR}+2.4\\mathrm{Red}+1}",
+    "band_mappings": {
+      "Standard VNIR": {
+        "Red": { "band_index": 12, "cwl_nm": 660, "fwhm_nm": 26.4, "approximate_match": false },
+        "NIR": { "band_index": 23, "cwl_nm": 799, "fwhm_nm": 32.0, "approximate_match": false }
+      },
+      "Extended VNIR": {
+        "Red": { "band_index": 16, "cwl_nm": 660, "fwhm_nm": 23.1, "approximate_match": false },
+        "NIR": { "band_index": 27, "cwl_nm": 800, "fwhm_nm": 28.0, "approximate_match": false }
+      }
+    },
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
+    "approximate_match": false,
+    "citations": [
+      { "paper": "Development of a two-band Enhanced Vegetation Index without a blue band", "authors": "Jiang Z. et al. (2008)", "doi": "10.1016/j.rse.2008.06.006", "link": "https://www.indexdatabase.de/db/i-single.php?id=576" }
+    ]
+  },
+  {
+    "name": "Atmospherically Resistant Vegetation Index (ARVI)",
+    "description": "Vegetation index resistant to atmospheric aerosols by incorporating a blue correction term. See literature for y definition",
+    "categories": ["vegetation"],
+    "keywords": ["aerosol resistance","canopy"],
+    "equation": "(NIR - Red - y(Red - Blue)) / (NIR + Red - y(Red + Blue))",
+    "latex_equation": "\\frac{\\mathrm{NIR} - \\mathrm{Red} - y(\\mathrm{Red}-\\mathrm{Blue})}{\\mathrm{NIR} + \\mathrm{Red} - y(\\mathrm{Red}+\\mathrm{Blue})}",
+    "band_mappings": {
+      "Extended VNIR": {
+        "Blue": { "band_index": 3, "cwl_nm": 480, "fwhm_nm": 16.8, "approximate_match": false },
+        "Red": { "band_index": 16, "cwl_nm": 660, "fwhm_nm": 23.1, "approximate_match": false },
+        "NIR": { "band_index": 27, "cwl_nm": 800, "fwhm_nm": 28.0, "approximate_match": false }
+      }
+    },
+    "compatible_satellites": ["Extended VNIR"],
+    "approximate_match": false,
+    "citations": [
+      { "paper": "Atmospherically resistant vegetation index (ARVI) for EOS-MODIS", "authors": "Kaufman Y.J., Tanre D. (1992)", "doi": "10.1109/36.134076", "link": "https://www.indexdatabase.de/db/i-single.php?id=4" }
+    ]
+  },
+  {
+    "name": "Soil Adjusted Vegetation Index (SAVI)",
+    "description": "Minimizes soil brightness impact in sparse canopies via soil factor L. See literature for range of L values, typically set at 0.5.",
+    "categories": ["vegetation"],
+    "keywords": ["soil", "sparse vegetation"],
+    "equation": "((1 + L) * (NIR - Red)) / (NIR + Red + L)",
+    "latex_equation": "(1 + L)\\,\\frac{\\mathrm{NIR}-\\mathrm{Red}}{\\mathrm{NIR}+\\mathrm{Red}+L}",
+    "band_mappings": {
+      "Standard VNIR": {
+        "Red": { "band_index": 13, "cwl_nm": 669, "fwhm_nm": 26.8, "approximate_match": false },
+        "NIR": { "band_index": 23, "cwl_nm": 799, "fwhm_nm": 32.0, "approximate_match": false }
+      },
+      "Extended VNIR": {
+        "Red": { "band_index": 17, "cwl_nm": 670, "fwhm_nm": 23.5, "approximate_match": false },
+        "NIR": { "band_index": 27, "cwl_nm": 800, "fwhm_nm": 28.0, "approximate_match": false }
+      }
+    },
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
+    "approximate_match": false,
+    "citations": [
+      { "paper": "A soil-adjusted vegetation index (SAVI)", "authors": "Huete A.R. (1988)", "doi": "10.1016/0034-4257(88)90106-X", "link": "https://www.indexdatabase.de/db/i-single.php?id=87" }
+    ]
+  },
+  {
+    "name": "Optimized Soil Adjusted Vegetation Index (OSAVI)",
+    "description": "Vegetation index with reduced soil influence. See literature for range of Y values, typically set at 0.16.",
+    "categories": ["vegetation"],
+    "keywords": ["soil", "semi-arid"],
+    "equation": "((1 + Y) * (NIR - Red)) / (NIR + Red + Y)",
+    "latex_equation": "(1 + Y)\\,\\frac{\\mathrm{NIR}-\\mathrm{Red}}{\\mathrm{NIR}+\\mathrm{Red}+Y}",
+    "band_mappings": {
+      "Standard VNIR": {
+        "Red": { "band_index": 13, "cwl_nm": 669, "fwhm_nm": 26.8, "approximate_match": false },
+        "NIR": { "band_index": 23, "cwl_nm": 799, "fwhm_nm": 32.0, "approximate_match": false }
+      },
+      "Extended VNIR": {
+        "Red": { "band_index": 17, "cwl_nm": 670, "fwhm_nm": 23.5, "approximate_match": false },
+        "NIR": { "band_index": 27, "cwl_nm": 800, "fwhm_nm": 28.0, "approximate_match": false }
+      }
+    },
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
+    "approximate_match": false,
+    "citations": [
+      { "paper": "Optimization of soil-adjusted vegetation indices", "authors": "Rondeaux G. et al. (1996)", "doi": "10.1016/0034-4257(95)00186-7", "link": "https://www.indexdatabase.de/db/i-single.php?id=63" }
+    ]
+  },
+  {
+    "name": "Modified Soil Adjusted Vegetation Index 2 (MSAVI2)",
+    "description": "Self-adjusting soil vegetation index removing need for explicit L parameter.",
+    "categories": ["vegetation"],
+    "keywords": ["soil", "sparse vegetation"],
+    "equation": "(2*NIR + 1 - sqrt((2*NIR + 1)^2 - 8*(NIR - Red)))/2",
+    "latex_equation": "\\frac{2\\mathrm{NIR}+1 - \\sqrt{(2\\mathrm{NIR}+1)^2 - 8(\\mathrm{NIR}-\\mathrm{Red})}}{2}",
+    "band_mappings": {
+      "Standard VNIR": {
+        "Red": { "band_index": 12, "cwl_nm": 660, "fwhm_nm": 26.4, "approximate_match": false },
+        "NIR": { "band_index": 23, "cwl_nm": 799, "fwhm_nm": 32.0, "approximate_match": false }
+      },
+      "Extended VNIR": {
+        "Red": { "band_index": 16, "cwl_nm": 660, "fwhm_nm": 23.1, "approximate_match": false },
+        "NIR": { "band_index": 27, "cwl_nm": 800, "fwhm_nm": 28.0, "approximate_match": false }
+      }
+    },
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
+    "approximate_match": false,
+    "citations": [
+      { "paper": "MSAVI2: A modified soil adjusted vegetation index", "authors": "Qi J. et al. (1994)", "doi": "10.1016/0034-4257(94)90134-1", "link": "https://www.indexdatabase.de/db/i-single.php?id=44" }
+    ]
+  },
+  {
+    "name": "Wide Dynamic Range Vegetation Index (WDRVI)",
+    "description": "Enhances sensitivity across moderate-high biomass using weighting of NIR.",
+    "categories": ["vegetation"],
+    "keywords": ["biomass", "dynamic range"],
+    "equation": "(0.1*NIR - Red) / (0.1*NIR + Red)",
+    "latex_equation": "\\frac{0.1\\mathrm{NIR}-\\mathrm{Red}}{0.1\\mathrm{NIR}+\\mathrm{Red}}",
+    "band_mappings": {
+      "Standard VNIR": {
+        "Red": { "band_index": 12, "cwl_nm": 660, "fwhm_nm": 26.4, "approximate_match": false },
+        "NIR": { "band_index": 23, "cwl_nm": 799, "fwhm_nm": 32.0, "approximate_match": false }
+      },
+      "Extended VNIR": {
+        "Red": { "band_index": 16, "cwl_nm": 660, "fwhm_nm": 23.1, "approximate_match": false },
+        "NIR": { "band_index": 27, "cwl_nm": 800, "fwhm_nm": 28.0, "approximate_match": false }
+      }
+    },
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
+    "approximate_match": false,
+    "citations": [
+      { "paper": "Wide Dynamic Range Vegetation Index for crop biophysical characterization", "authors": "Gitelson A.A. (2004)", "doi": "10.1078/0176-1617-01176", "link": "https://www.indexdatabase.de/db/i-single.php?id=125" }
+    ]
+  },
+  {
+    "name": "Green Normalized Difference Vegetation Index (GNDVI)",
+    "description": "NDVI variant using green band for enhanced chlorophyll sensitivity.",
+    "categories": ["vegetation"],
+    "keywords": ["chlorophyll","canopy","green band"],
+    "equation": "(NIR - Green) / (NIR + Green)",
+    "latex_equation": "\\frac{\\mathrm{NIR}-\\mathrm{Green}}{\\mathrm{NIR}+\\mathrm{Green}}",
+    "band_mappings": {
+      "Standard VNIR": {
+        "Green": { "band_index": 5, "cwl_nm": 549, "fwhm_nm": 22.0, "approximate_match": false },
+        "NIR": { "band_index": 23, "cwl_nm": 799, "fwhm_nm": 32.0, "approximate_match": false }
+      },
+      "Extended VNIR": {
+        "Green": { "band_index": 9, "cwl_nm": 550, "fwhm_nm": 19.3, "approximate_match": false },
+        "NIR": { "band_index": 27, "cwl_nm": 800, "fwhm_nm": 28.0, "approximate_match": false }
+      }
+    },
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
+    "approximate_match": false,
+    "citations": [
+      { "paper": "Remote estimation of chlorophyll content in higher plant leaves", "authors": "Gitelson A., Merzlyak M.N. (1998)", "doi": "10.1080/014311697217558", "link": null },
+      { "paper": "Index Database", "authors": null, "doi": null, "link": "https://www.indexdatabase.de/db/i-single.php?id=28" }
+    ]
+  },
+  {
+    "name": "Green Chlorophyll Index (GCI)",
+    "description": "Chlorophyll proxy using NIR-to-green reflectance ratio minus one.",
+    "categories": ["vegetation"],
+    "keywords": ["chlorophyll", "leaf content"],
+    "equation": "(NIR / Green) - 1",
+    "latex_equation": "\\frac{\\mathrm{NIR}}{\\mathrm{Green}} - 1",
+    "band_mappings": {
+      "Standard VNIR": {
+        "Green": { "band_index": 5, "cwl_nm": 549, "fwhm_nm": 22.0, "approximate_match": false },
+        "NIR": { "band_index": 23, "cwl_nm": 799, "fwhm_nm": 32.0, "approximate_match": false }
+      },
+      "Extended VNIR": {
+        "Green": { "band_index": 9, "cwl_nm": 550, "fwhm_nm": 19.3, "approximate_match": false },
+        "NIR": { "band_index": 27, "cwl_nm": 800, "fwhm_nm": 28.0, "approximate_match": false }
+      }
+    },
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
+    "approximate_match": false,
+    "citations": [
+      { "paper": "Relationships between leaf chlorophyll and spectral reflectance", "authors": "Gitelson A.A. et al. (2003)", "doi": "10.1078/0176-1617-00887", "link": null },
+      { "paper": "Index Database", "authors": null, "doi": null, "link": "https://www.indexdatabase.de/db/i-single.php?id=128" }
+    ]
+  },
+  {
+    "name": "Chlorophyll Index Red Edge (CIrededge)",
+    "description": "Chlorophyll content index emphasizing red-edge reflectance.",
+    "categories": ["vegetation"],
+    "keywords": ["chlorophyll", "red edge"],
+    "equation": "(NIR / RE1) - 1",
+    "latex_equation": "\\frac{\\mathrm{NIR}}{\\mathrm{RE1}} - 1",
+    "band_mappings": {
+      "Standard VNIR": {
+        "RE1": { "band_index": 17, "cwl_nm": 711, "fwhm_nm": 28.4, "approximate_match": false },
+        "NIR": { "band_index": 23, "cwl_nm": 799, "fwhm_nm": 32.0, "approximate_match": false }
+      },
+      "Extended VNIR": {
+        "RE1": { "band_index": 21, "cwl_nm": 712, "fwhm_nm": 24.9, "approximate_match": false },
+        "NIR": { "band_index": 27, "cwl_nm": 800, "fwhm_nm": 28.0, "approximate_match": false }
+      }
+    },
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
+    "approximate_match": false,
+    "citations": [
+      { "paper": "Remote estimation of leaf area index and green leaf biomass in maize canopies", "authors": "Gitelson A.A. et al. (2003)", "doi": "10.1029/2002GL016450", "link": null },
+      { "paper": "Index Database", "authors": null, "doi": null, "link": "https://www.indexdatabase.de/db/i-single.php?id=131" }
+    ]
+  },
+  {
+    "name": "Normalized Difference Red Edge (NDRE)",
+    "description": "Uses first red-edge band instead of red to extend sensitivity into higher chlorophyll ranges.",
+    "categories": ["vegetation"],
+    "keywords": ["chlorophyll","red edge","biomass"],
+    "equation": "(NIR - RE1) / (NIR + RE1)",
+    "latex_equation": "\\frac{\\mathrm{NIR}-\\mathrm{RE1}}{\\mathrm{NIR}+\\mathrm{RE1}}",
+    "band_mappings": {
+      "Standard VNIR": {
+        "RE1": { "band_index": 17, "cwl_nm": 711, "fwhm_nm": 28.4, "approximate_match": false },
+        "NIR": { "band_index": 23, "cwl_nm": 799, "fwhm_nm": 32.0, "approximate_match": false }
+      },
+      "Extended VNIR": {
+        "RE1": { "band_index": 21, "cwl_nm": 712, "fwhm_nm": 24.9, "approximate_match": false },
+        "NIR": { "band_index": 27, "cwl_nm": 800, "fwhm_nm": 28.0, "approximate_match": false }
+      }
+    },
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
+    "approximate_match": false,
+    "citations": [
+      { "paper": "Coincident detection of crop water stress, nitrogen status, and canopy density using ground based multispectral data", "authors": "Barnes E. et al (2000)", "doi": null, "link": "https://www.researchgate.net/publication/43256762_Coincident_detection_of_crop_water_stress_nitrogen_status_and_canopy_density_using_ground_based_multispectral_data" },
+      { "paper": "Index Database", "authors": null, "doi": null, "link": "https://www.indexdatabase.de/db/i-single.php?id=223" }
+    ]
+  },
+  {
+    "name": "Canopy Chlorophyll Content Index (CCCI)",
+    "description": "Combines NDRE and NDVI style signals to approximate canopy chlorophyll content. Can also be used to estimate canopy nitrogen content.",
+    "categories": ["vegetation"],
+    "keywords": ["chlorophyll", "canopy", "nitrogen"],
+    "equation": "((NIR - RE1)/(NIR + RE1)) / ((NIR - Red)/(NIR + Red))",
+    "latex_equation": "\\frac{\\frac{\\mathrm{NIR}-\\mathrm{RE1}}{\\mathrm{NIR}+\\mathrm{RE1}}}{\\frac{\\mathrm{NIR}-\\mathrm{Red}}{\\mathrm{NIR}+\\mathrm{Red}}}",
+    "band_mappings": {
+      "Standard VNIR": {
+        "RE1": { "band_index": 17, "cwl_nm": 711, "fwhm_nm": 28.4, "approximate_match": false },
+        "Red": { "band_index": 12, "cwl_nm": 660, "fwhm_nm": 26.4, "approximate_match": false },
+        "NIR": { "band_index": 23, "cwl_nm": 799, "fwhm_nm": 32.0, "approximate_match": false }
+      },
+      "Extended VNIR": {
+        "RE1": { "band_index": 21, "cwl_nm": 712, "fwhm_nm": 24.9, "approximate_match": false },
+        "Red": { "band_index": 16, "cwl_nm": 660, "fwhm_nm": 23.1, "approximate_match": false },
+        "NIR": { "band_index": 27, "cwl_nm": 800, "fwhm_nm": 28.0, "approximate_match": false }
+      }
+    },
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
+    "approximate_match": false,
+    "citations": [
+      { "paper": "Coincident detection of crop water stress, nitrogen status, and canopy density using ground based multispectral data", "authors": "Barnes E. et al (2000)", "doi": null, "link": "https://www.researchgate.net/publication/43256762_Coincident_detection_of_crop_water_stress_nitrogen_status_and_canopy_density_using_ground_based_multispectral_data" },
+      { "paper": "Measuring and predicting canopy nitrogen nutrition in wheat using a spectral index—The canopy chlorophyll content index (CCCI)", "authors": "Fitzgerald G. et al. (2008)", "doi": "10.1016/j.fcr.2010.01.010", "link": null },
+      { "paper": "Index Database", "authors": null, "doi": null, "link": "https://www.indexdatabase.de/db/i-single.php?id=224" }
+    ]
+  },
+  {
+    "name": "Photochemical Reflectance Index (PRI)",
+    "description": "Sensitive to xanthophyll cycle activity and light-use efficiency.",
+    "categories": ["vegetation"],
+    "keywords": ["stress", "xanthophyll","photosynthesis","light use efficiency"],
+    "equation": "(R570 - R531) / (R570 + R531)",
+    "latex_equation": "\\frac{R_{570}-R_{531}}{R_{531}+R_{531}}",
+    "band_mappings": {
+      "Standard VNIR": {
+        "R531": { "band_index": 4, "cwl_nm": 535, "fwhm_nm": 21.4, "approximate_match": true },
+        "R570": { "band_index": 6, "cwl_nm": 570, "fwhm_nm": 22.8, "approximate_match": false }
+      },
+      "Extended VNIR": {
+        "R531": { "band_index": 8, "cwl_nm": 535, "fwhm_nm": 18.7, "approximate_match": true },
+        "R570": { "band_index": 10, "cwl_nm": 570, "fwhm_nm": 20.0, "approximate_match": false }
+      }
+    },
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
+    "approximate_match": true,
+    "citations": [
+      { "paper": "A narrow-waveband spectral index sensitive to pigment changes", "authors": "Gamon J.A. et al. (1992)", "doi": "10.1016/0034-4257(92)90059-s", "link": null },
+      { "paper": "Index Database", "authors": null, "doi": null, "link": "https://www.indexdatabase.de/db/r-single.php?id=432" }
+    ]
+  },
+  {
+    "name": "Visible Atmospherically Resistant Index (VARI)",
+    "description": "Visible-band index minimizing atmospheric effects for fractional vegetation estimation.",
+    "categories": ["vegetation"],
+    "keywords": ["visible","fractional cover"],
+    "equation": "(Green - Red) / (Green + Red - Blue)",
+    "latex_equation": "\\frac{\\mathrm{Green}-\\mathrm{Red}}{\\mathrm{Green}+\\mathrm{Red}-\\mathrm{Blue}}",
+    "band_mappings": {
+      "Extended VNIR": {
+        "Blue": { "band_index": 3, "cwl_nm": 480, "fwhm_nm": 16.8, "approximate_match": false },
+        "Green": { "band_index": 9, "cwl_nm": 550, "fwhm_nm": 19.3, "approximate_match": false },
+        "Red": { "band_index": 16, "cwl_nm": 660, "fwhm_nm": 23.1, "approximate_match": false }
+      }
+    },
+    "compatible_satellites": ["Extended VNIR"],
+    "approximate_match": false,
+    "citations": [
+      { "paper": "Novel algorithms for remote estimation of vegetation fraction", "authors": "Gitelson A.A. et al. (2002)", "doi": "10.1016/s0034-4257(01)00289-9", "link": null },
+      { "paper": "Index Database", "authors": null, "doi": null, "link": "https://www.indexdatabase.de/db/r-single.php?id=673" }
+    ]
+  },
+  {
+    "name": "Normalized Difference Water Index (NDWI)",
+    "description": "Red-NIR formulation emphasizing water / moisture features. Choosing NIR bands further into the NIR spectrum may improve results.",
+    "categories": ["water"],
+    "keywords": ["water", "moisture", "surface water", "broadband"],
+    "equation": "(Red - NIR) / (Red + NIR)",
+    "latex_equation": "\\frac{\\mathrm{Red}-\\mathrm{NIR}}{\\mathrm{Red}+\\mathrm{NIR}}",
+    "band_mappings": {
+      "Standard VNIR": {
+        "Red": { "band_index": 11, "cwl_nm": 650, "fwhm_nm": 26.0, "approximate_match": false },
+        "NIR": { "band_index": 23, "cwl_nm": 799, "fwhm_nm": 32.0, "approximate_match": false }
+      },
+      "Extended VNIR": {
+        "Red": { "band_index": 15, "cwl_nm": 650, "fwhm_nm": 22.8, "approximate_match": false },
+        "NIR": { "band_index": 27, "cwl_nm": 800, "fwhm_nm": 28.0, "approximate_match": false }
+      }
+    },
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
+    "approximate_match": false,
+    "citations": [
+      { "paper": "The use of the Normalized Difference Water Index (NDWI) in the delineation of open water features", "authors": "McFeeters S.K. (1996)", "doi": "10.1080/01431169608948714", "link": null }
+    ]
+  },
+  {
+    "name": "Normalized Difference Chlorophyll Index (NDWI)",
+    "description": "Normalized difference index for measuring chlorophyll-a concentration in bodies of water.",
+    "categories": ["water"],
+    "keywords": ["water", "chlorophyll", "algae", "broadband"],
+    "equation": "(RedEdge - Red) / (RedEdge + Red)",
+    "latex_equation": "\\frac{\\mathrm{RedEdge}-\\mathrm{Red}}{\\mathrm{RedEdge}+\\mathrm{Red}}",
+    "band_mappings": {
+      "Standard VNIR": {
+        "Red": { "band_index": 13, "cwl_nm": 669, "fwhm_nm": 26.8, "approximate_match": false },
+        "RedEdge": { "band_index": 17, "cwl_nm": 711, "fwhm_nm": 28.4, "approximate_match": false }
+      },
+      "Extended VNIR": {
+        "Red": { "band_index": 16, "cwl_nm": 660, "fwhm_nm": 23.1, "approximate_match": false },
+        "RedEdge": { "band_index": 21, "cwl_nm": 712, "fwhm_nm": 24.9, "approximate_match": false }
+      }
+    },
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
+    "approximate_match": false,
+    "citations": [
+      { "paper": "Normalized difference chlorophyll index: A novel model for remote estimation of chlorophyll-a concentration in turbid productive waters", "authors": "Mishra S.; Mishra D. (1996)", "doi": "10.1016/j.rse.2011.10.016", "link": null }
+    ]
+  },
+  {
+    "name": "Normalized Difference Water Index Green (NDWIGreen)",
+    "description": "Green-NIR formulation emphasizing water / moisture features. Choosing NIR bands further into the NIR spectrum may improve results.",
+    "categories": ["water"],
+    "keywords": ["water", "moisture", "surface water", "broadband"],
+    "equation": "(Green - NIR) / (Green + NIR)",
+    "latex_equation": "\\frac{\\mathrm{Green}-\\mathrm{NIR}}{\\mathrm{Green}+\\mathrm{NIR}}",
+    "band_mappings": {
+      "Standard VNIR": {
+        "Green": { "band_index": 5, "cwl_nm": 549, "fwhm_nm": 22.0, "approximate_match": false },
+        "NIR": { "band_index": 23, "cwl_nm": 799, "fwhm_nm": 32.0, "approximate_match": false }
+      },
+      "Extended VNIR": {
+        "Green": { "band_index": 9, "cwl_nm": 550, "fwhm_nm": 19.3, "approximate_match": false },
+        "NIR": { "band_index": 27, "cwl_nm": 800, "fwhm_nm": 28.0, "approximate_match": false }
+      }
+    },
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
+    "approximate_match": false,
+    "citations": [
+      { "paper": "The use of the Normalized Difference Water Index (NDWI) in the delineation of open water features", "authors": "McFeeters S.K. (1996)", "doi": "10.1080/01431169608948714", "link": null }
+    ]
+  },
+  {
+    "name": "Red Edge NDVI (RENDVI)",
+    "description": "NDVI-style index substituting a red-edge band (710 nm) for red to improve saturation performance.",
+    "categories": ["vegetation"],
+    "keywords": ["red edge", "chlorophyll"],
+    "equation": "(R750 - R710) / (R750 + R710)",
+    "latex_equation": "\\frac{R_{750}-R_{710}}{R_{750}+R_{710}}",
+    "band_mappings": {
+      "Standard VNIR": {
+        "R750": { "band_index": 20, "cwl_nm": 750, "fwhm_nm": 30.0, "approximate_match": false },
+        "R710": { "band_index": 17, "cwl_nm": 711, "fwhm_nm": 28.4, "approximate_match": false }
+      },
+      "Extended VNIR": {
+        "R750": { "band_index": 24, "cwl_nm": 750, "fwhm_nm": 26.3, "approximate_match": false },
+        "R710": { "band_index": 21, "cwl_nm": 712, "fwhm_nm": 24.9, "approximate_match": false }
+      }
+    },
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
+    "approximate_match": false,
+    "citations": [
+      { "paper": "Red-edge indices and chlorophyll content", "authors": "Gitelson A.; Merzlyak M.N. (1994)", "doi": "0.1016/1011-1344(93)06963-4", "link": null },
+      { "paper": "Index Database", "authors": null, "doi": null, "link": "https://www.indexdatabase.de/db/r-single.php?id=649" }
+    ]
+  },
+  {
+    "name": "NDVI 705nm (ND705)",
+    "description": "NDVI-style index substituting a red-edge band (705 nm) for red to improve saturation performance. Fairly high correlation to total chlorophyll content with an r² of 0.61 (Sims 2002)",
+    "categories": ["vegetation"],
+    "keywords": ["red edge", "chlorophyll"],
+    "equation": "(R750 - R705) / (R750 + R705)",
+    "latex_equation": "\\frac{R_{750}-R_{705}}{R_{750}+R_{705}}",
+    "band_mappings": {
+      "Standard VNIR": {
+        "R750": { "band_index": 20, "cwl_nm": 750, "fwhm_nm": 30.0, "approximate_match": false },
+        "R705": { "band_index": 16, "cwl_nm": 699, "fwhm_nm": 28.0, "approximate_match": true }
+      },
+      "Extended VNIR": {
+        "R750": { "band_index": 24, "cwl_nm": 750, "fwhm_nm": 26.3, "approximate_match": false },
+        "R705": { "band_index": 20, "cwl_nm": 700, "fwhm_nm": 24.5, "approximate_match": true }
+      }
+    },
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
+    "approximate_match": true,
+    "citations": [
+      { "paper": "Relationships Between Leaf Pigment Content and Spectral Reflectance Across a Wide Range of Species, Leaf Structures and Developmental Stages", "authors": "Sims D.A.; Gamon J. (2002)", "doi": "10.1016/S0034-4257(02)00010-X", "link": null },
+      { "paper": "Index Database", "authors": null, "doi": null, "link": "https://www.indexdatabase.de/db/i-single.php?id=171" }
+    ]
+  },
+  {
+    "name": "MERIS Terrestrial Chlorophyll Index (MTCI)",
+    "description": "Ratio leveraging bands across chlorophyll absorption maximum and red-edge rise.",
+    "categories": ["vegetation"],
+    "keywords": ["chlorophyll", "red edge"],
+    "equation": "(R754 - R709) / (R709 - R681)",
+    "latex_equation": "\\frac{R_{754}-R_{709}}{R_{709}-R_{681}}",
+    "band_mappings": {
+      "Standard VNIR": {
+        "R754": { "band_index": 20, "cwl_nm": 750, "fwhm_nm": 30.0, "approximate_match": false },
+        "R709": { "band_index": 17, "cwl_nm": 711, "fwhm_nm": 28.4, "approximate_match": false },
+        "R681": { "band_index": 14, "cwl_nm": 679, "fwhm_nm": 27.2, "approximate_match": false }
+      },
+      "Extended VNIR": {
+        "R754": { "band_index": 24, "cwl_nm": 750, "fwhm_nm": 26.3, "approximate_match": false },
+        "R709": { "band_index": 21, "cwl_nm": 712, "fwhm_nm": 24.9, "approximate_match": false },
+        "R681": { "band_index": 18, "cwl_nm": 680, "fwhm_nm": 23.8, "approximate_match": false }
+      }
+    },
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
+    "approximate_match": false,
+    "citations": [
+      { "paper": "The MERIS terrestrial chlorophyll index", "authors": "Dash J., Curran P.J. (2004)", "doi": "10.1080/0143116042000274015", "link": null },
+      { "paper": "Index Database", "authors": null, "doi": null, "link": "https://www.indexdatabase.de/db/i-single.php?id=169" }
+    ]
+  },
+  {
+    "name": "Modified Chlorophyll Absorption Ratio Index (MCARI)",
+    "description": "Enhances chlorophyll absorption signal minimizing background effects.",
+    "categories": ["vegetation"],
+    "keywords": ["chlorophyll", "leaf pigments"],
+    "equation": "((R700 - R670) - 0.2*(R700 - R550)) * (R700 / R670)",
+    "latex_equation": "\\left((R_{700}-R_{670}) - 0.2\\,(R_{700}-R_{550})\\right)\\left(\\frac{R_{700}}{R_{670}}\\right)",
+    "band_mappings": {
+      "Standard VNIR": {
+        "R700": { "band_index": 16, "cwl_nm": 699, "fwhm_nm": 28.0, "approximate_match": false },
+        "R670": { "band_index": 13, "cwl_nm": 669, "fwhm_nm": 26.8, "approximate_match": false },
+        "R550": { "band_index": 5, "cwl_nm": 549, "fwhm_nm": 22.0, "approximate_match": false }
+      },
+      "Extended VNIR": {
+        "R700": { "band_index": 20, "cwl_nm": 700, "fwhm_nm": 24.5, "approximate_match": false },
+        "R670": { "band_index": 17, "cwl_nm": 670, "fwhm_nm": 23.5, "approximate_match": false },
+        "R550": { "band_index": 9, "cwl_nm": 550, "fwhm_nm": 19.3, "approximate_match": false }
+      }
+    },
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
+    "approximate_match": false,
+    "citations": [
+      { "paper": "Estimating Corn Leaf Chlorophyll Concentration from Leaf and Canopy Reflectance", "authors": "Daughtry C.S.T. et al. (2000)", "doi": "10.1016/s0034-4257(00)00113-9", "link": null },
+      { "paper": "Index Database", "authors": null, "doi": null, "link": "https://www.indexdatabase.de/db/i-single.php?id=41" },
+      { "paper": "ENVI Narrowband Greenness Indices", "authors": null, "doi": null, "link": "https://www.nv5geospatialsoftware.com/docs/NarrowbandGreenness.html#Modified2" }
+    ]
+  },
+  {
+    "name": "Modified Chlorophyll Absorption Ratio Index 2 (MCARI2)",
+    "description": "Refined MCARI reducing effects of leaf area and geometry.",
+    "categories": ["vegetation"],
+    "keywords": ["chlorophyll", "stress"],
+    "equation": "((1.5*(2.5*(NIR - Red) - 1.3*(NIR - Green)))) / sqrt((2*NIR + 1)^2 - (6*NIR - 5*sqrt(Red)) - 0.5)",
+    "latex_equation": "\\frac{1.5\\left(2.5(\\mathrm{NIR}-\\mathrm{Red}) - 1.3(\\mathrm{NIR}-\\mathrm{Green})\\right)}{\\sqrt{(2\\mathrm{NIR}+1)^2 - (6\\mathrm{NIR} - 5\\sqrt{\\mathrm{Red}}) - 0.5}}",
+    "band_mappings": {
+      "Standard VNIR": {
+        "Green": { "band_index": 5, "cwl_nm": 549, "fwhm_nm": 22.0, "approximate_match": false },
+        "Red": { "band_index": 12, "cwl_nm": 660, "fwhm_nm": 26.4, "approximate_match": false },
+        "NIR": { "band_index": 23, "cwl_nm": 799, "fwhm_nm": 32.0, "approximate_match": false }
+      },
+      "Extended VNIR": {
+        "Green": { "band_index": 9, "cwl_nm": 550, "fwhm_nm": 19.3, "approximate_match": false },
+        "Red": { "band_index": 16, "cwl_nm": 660, "fwhm_nm": 23.1, "approximate_match": false },
+        "NIR": { "band_index": 27, "cwl_nm": 800, "fwhm_nm": 28.0, "approximate_match": false }
+      }
+    },
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
+    "approximate_match": false,
+    "citations": [
+      { "paper": "Hyperspectral vegetation indices and novel algorithms for predicting green LAI of crop canopies: Modeling and validation in the context of precision agriculture", "authors": "Haboudane D. et al. (2004)", "doi": "10.1016/j.rse.2003.12.013", "link": null },
+      { "paper": "Index Database", "authors": null, "doi": null, "link": "https://www.indexdatabase.de/db/i-single.php?id=43" },
+      { "paper": "ENVI Narrowband Greenness Indices", "authors": null, "doi": null, "link": "https://www.nv5geospatialsoftware.com/docs/NarrowbandGreenness.html#Modified3" }
+    ]
+  },
+  {
+    "name": "Transformed Chlorophyll Absorption Ratio Index (TCARI)",
+    "description": "Measures the relative abundance of chlorophyll, similar to MCARI and other CARI indices.",
+    "categories": ["vegetation"],
+    "keywords": ["chlorophyll", "leaf pigments"],
+    "equation": "3 * ((R700 - R670) - 0.2*(R700 - R550)*(R700/R670))",
+    "latex_equation": "3\\left((R_{700}-R_{670}) - 0.2\\,(R_{700}-R_{550})\\,\\frac{R_{700}}{R_{670}}\\right)",
+    "band_mappings": {
+      "Standard VNIR": {
+        "R700": { "band_index": 16, "cwl_nm": 699, "fwhm_nm": 28.0, "approximate_match": false },
+        "R670": { "band_index": 13, "cwl_nm": 669, "fwhm_nm": 26.8, "approximate_match": false },
+        "R550": { "band_index": 5, "cwl_nm": 549, "fwhm_nm": 22.0, "approximate_match": false }
+      },
+      "Extended VNIR": {
+        "R700": { "band_index": 20, "cwl_nm": 700, "fwhm_nm": 24.5, "approximate_match": false },
+        "R670": { "band_index": 17, "cwl_nm": 670, "fwhm_nm": 23.5, "approximate_match": false },
+        "R550": { "band_index": 9, "cwl_nm": 550, "fwhm_nm": 19.3, "approximate_match": false }
+      }
+    },
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
+    "approximate_match": false,
+    "citations": [
+      { "paper": "Integrated narrow-band vegetation indices for prediction of crop chlorophyll content for application to precision agriculture", "authors": "Haboudane D. et al. (2002)", "doi": "doi.org/10.1016/S0034-4257(02)00018-4", "link": null },
+      { "paper": "Index Database", "authors": null, "doi": null, "link": "https://www.indexdatabase.de/db/i-single.php?id=96" },
+      { "paper": "ENVI Narrowband Greenness Indices", "authors": null, "doi": null, "link": "https://www.nv5geospatialsoftware.com/docs/NarrowbandGreenness.html#Transfor" }
+    ]
+  },
+  {
+    "name": "TCARI/OSAVI Ratio",
+    "description": "Combines TCARI and OSAVI to further normalize chlorophyll signal for soil and structure.",
+    "categories": ["vegetation"],
+    "keywords": ["chlorophyll", "soil correction", "soil", "stress"],
+    "equation": "(TCARI) / (OSAVI)",
+    "latex_equation": "\\frac{\\mathrm{TCARI}}{\\mathrm{OSAVI}}",
+    "band_mappings": {
+      "Standard VNIR": {
+        "R700": { "band_index": 16, "cwl_nm": 699, "fwhm_nm": 28.0, "approximate_match": false },
+        "R670": { "band_index": 13, "cwl_nm": 669, "fwhm_nm": 26.8, "approximate_match": false },
+        "R550": { "band_index": 5, "cwl_nm": 549, "fwhm_nm": 22.0, "approximate_match": false },
+        "Red": { "band_index": 12, "cwl_nm": 660, "fwhm_nm": 26.4, "approximate_match": false },
+        "NIR": { "band_index": 23, "cwl_nm": 799, "fwhm_nm": 32.0, "approximate_match": false }
+      },
+      "Extended VNIR": {
+        "R700": { "band_index": 20, "cwl_nm": 700, "fwhm_nm": 24.5, "approximate_match": false },
+        "R670": { "band_index": 17, "cwl_nm": 670, "fwhm_nm": 23.5, "approximate_match": false },
+        "R550": { "band_index": 9, "cwl_nm": 550, "fwhm_nm": 19.3, "approximate_match": false },
+        "Red": { "band_index": 16, "cwl_nm": 660, "fwhm_nm": 23.1, "approximate_match": false },
+        "NIR": { "band_index": 27, "cwl_nm": 800, "fwhm_nm": 28.0, "approximate_match": false }
+      }
+    },
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
+    "approximate_match": false,
+    "citations": [
+      { "paper": "Integrated narrow-band vegetation indices for prediction of crop chlorophyll content for application to precision agriculture", "authors": "Haboudane D. et al. (2002)", "doi": "10.1016/S0034-4257(02)00018-4", "link": null },
+      { "paper": "Index Database", "authors": null, "doi": null, "link": "https://www.indexdatabase.de/db/i-single.php?id=191" }
+    ]
+  },
+  {
+    "name": "Modified Triangular Vegetation Index (MTVI)",
+    "description": "TVI, with 750nm replaced with 800nm to make the index suitable for leaf area index estimation.",
+    "categories": ["vegetation"],
+    "keywords": ["chlorophyll", "leaf area index"],
+    "equation": "1.2 * (1.2*(NIR - Green) - 2.5*(Red - Green))",
+    "latex_equation": "1.2(1.2(\\mathrm{NIR}-\\mathrm{Green}) - 2.5(\\mathrm{Red}-\\mathrm{Green}))",
+    "band_mappings": {
+      "Standard VNIR": {
+        "Green": { "band_index": 5, "cwl_nm": 549, "fwhm_nm": 22.0, "approximate_match": false },
+        "Red": { "band_index": 13, "cwl_nm": 669, "fwhm_nm": 26.8, "approximate_match": false },
+        "NIR": { "band_index": 23, "cwl_nm": 799, "fwhm_nm": 32.0, "approximate_match": false }
+      },
+      "Extended VNIR": {
+        "Green": { "band_index": 9, "cwl_nm": 550, "fwhm_nm": 19.3, "approximate_match": false },
+        "Red": { "band_index": 17, "cwl_nm": 670, "fwhm_nm": 23.5, "approximate_match": false },
+        "NIR": { "band_index": 27, "cwl_nm": 800, "fwhm_nm": 28.0, "approximate_match": false }
+      }
+    },
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
+    "approximate_match": false,
+    "citations": [
+      { "paper": "Hyperspectral vegetation indices and Novel Algorithms for Predicting Green LAI of crop canopies: Modeling and Validation in the Context of Precision Agriculture", "authors": "Haboudane D. et al. (2002)", "doi": "10.1016/j.rse.2003.12.013", "link": null },
+      { "paper": "Index Database", "authors": null, "doi": null, "link": "https://www.indexdatabase.de/db/i-single.php?id=46" },
+      { "paper": "ENVI Narrowband Greenness Indices", "authors": null, "doi": null, "link": "https://www.nv5geospatialsoftware.com/docs/NarrowbandGreenness.html#Modified9" }
+    ]
+  },
+  {
+    "name": "Modified Triangular Vegetation Index - Improved (MTVI2)",
+    "description": "MTVI with an additional soil adjustment factor. Outperforms TVI in predicting LAI.",
+    "categories": ["vegetation"],
+    "keywords": ["chlorophyll", "leaf area index"],
+    "equation": "1.5 * (1.2*(NIR - Green) - 2.5*(Red - Green)) / sqrt((2*NIR + 1)^2 - (6*NIR - 5*sqrt(Red)) - 0.5)",
+    "latex_equation": "1.5\\,\\frac{1.2(\\mathrm{NIR}-\\mathrm{Green}) - 2.5(\\mathrm{Red}-\\mathrm{Green})}{\\sqrt{(2\\mathrm{NIR}+1)^2 - (6\\mathrm{NIR} - 5\\sqrt{\\mathrm{Red}}) - 0.5}}",
+    "band_mappings": {
+      "Standard VNIR": {
+        "Green": { "band_index": 5, "cwl_nm": 549, "fwhm_nm": 22.0, "approximate_match": false },
+        "Red": { "band_index": 13, "cwl_nm": 669, "fwhm_nm": 26.8, "approximate_match": false },
+        "NIR": { "band_index": 23, "cwl_nm": 799, "fwhm_nm": 32.0, "approximate_match": false }
+      },
+      "Extended VNIR": {
+        "Green": { "band_index": 9, "cwl_nm": 550, "fwhm_nm": 19.3, "approximate_match": false },
+        "Red": { "band_index": 17, "cwl_nm": 670, "fwhm_nm": 23.5, "approximate_match": false },
+        "NIR": { "band_index": 27, "cwl_nm": 800, "fwhm_nm": 28.0, "approximate_match": false }
+      }
+    },
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
+    "approximate_match": false,
+    "citations": [
+      { "paper": "Hyperspectral vegetation indices and Novel Algorithms for Predicting Green LAI of crop canopies: Modeling and Validation in the Context of Precision Agriculture", "authors": "Haboudane D. et al. (2002)", "doi": "10.1016/j.rse.2003.12.013", "link": null },
+      { "paper": "Index Database", "authors": null, "doi": null, "link": "https://www.indexdatabase.de/db/i-single.php?id=47" },
+      { "paper": "ENVI Narrowband Greenness Indices", "authors": null, "doi": null, "link": "https://www.nv5geospatialsoftware.com/docs/NarrowbandGreenness.html#Modified9" }
+    ]
+  },
+  {
+    "name": "Renormalized Difference Vegetation Index (RDVI)",
+    "description": "Combines the advantages of NDVI and Modified Simple Ratio for low and high LAI values, respectively. (Haboudane 2002)",
+    "categories": ["vegetation"],
+    "keywords": ["biomass", "renormalized"],
+    "equation": "(NIR - Red) / sqrt(NIR + Red)",
+    "latex_equation": "\\frac{\\mathrm{NIR}-\\mathrm{Red}}{\\sqrt{\\mathrm{NIR}+\\mathrm{Red}}}",
+    "band_mappings": {
+      "Standard VNIR": {
+        "Red": { "band_index": 13, "cwl_nm": 669, "fwhm_nm": 26.8, "approximate_match": false },
+        "NIR": { "band_index": 23, "cwl_nm": 799, "fwhm_nm": 32.0, "approximate_match": false }
+      },
+      "Extended VNIR": {
+        "Red": { "band_index": 17, "cwl_nm": 670, "fwhm_nm": 23.5, "approximate_match": false },
+        "NIR": { "band_index": 27, "cwl_nm": 800, "fwhm_nm": 28.0, "approximate_match": false }
+      }
+    },
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
+    "approximate_match": false,
+    "citations": [
+      { "paper": "Hyperspectral vegetation indices and Novel Algorithms for Predicting Green LAI of crop canopies: Modeling and Validation in the Context of Precision Agriculture", "authors": "Haboudane D. et al. (2002)", "doi": "10.1016/j.rse.2003.12.013", "link": null },
+      { "paper": "Index Database", "authors": null, "doi": null, "link": "https://www.indexdatabase.de/db/i-single.php?id=240" }
+    ]
+  },
+  {
+    "name": "Plant Senescence Reflectance Index (PSRI)",
+    "description": "Tracks carotenoid to chlorophyll ratio; sensitive to senescence and stress.",
+    "categories": ["vegetation"],
+    "keywords": ["senescence", "carotenoids", "pigments"],
+    "equation": "(R680 - R500) / R750",
+    "latex_equation": "\\frac{R_{680}-R_{500}}{R_{750}}",
+    "band_mappings": {
+      "Standard VNIR": {
+        "R680": { "band_index": 14, "cwl_nm": 679, "fwhm_nm": 27.2, "approximate_match": false },
+        "R500": { "band_index": 1, "cwl_nm": 503, "fwhm_nm": 20.1, "approximate_match": false },
+        "R750": { "band_index": 20, "cwl_nm": 750, "fwhm_nm": 30.0, "approximate_match": false }
+      },
+      "Extended VNIR": {
+        "R680": { "band_index": 18, "cwl_nm": 680, "fwhm_nm": 23.8, "approximate_match": false },
+        "R500": { "band_index": 5, "cwl_nm": 503, "fwhm_nm": 17.6, "approximate_match": false },
+        "R750": { "band_index": 24, "cwl_nm": 750, "fwhm_nm": 26.3, "approximate_match": false }
+      }
+    },
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
+    "approximate_match": false,
+    "citations": [
+      { "paper": "Non-destructive optical detection of pigment changes during leaf senescence and fruit ripening", "authors": "Merzlyak M.N. et al. (1999)", "doi": "10.1034/j.1399-3054.1999.106119.x", "link": null },
+      { "paper": "Index Database", "authors": null, "doi": null, "link": "https://www.indexdatabase.de/db/i-single.php?id=69" },
+      { "paper": "ENVI Dry or Senescent Carbon Indices", "authors": null, "doi": null, "link": "https://www.nv5geospatialsoftware.com/docs/DrySenescentCarbon.html" }
+    ]
+  },
+  {
+    "name": "Anthocyanin Reflectance Index 1 (ARI1)",
+    "description": "Sensitive to anthocyanin content via reciprocal reflectances at green and red-edge.",
+    "categories": ["vegetation"],
+    "keywords": ["anthocyanin", "pigments"],
+    "equation": "(1 / R550) - (1 / R700)",
+    "latex_equation": "\\frac{1}{R_{550}} - \\frac{1}{R_{700}}",
+    "band_mappings": {
+      "Standard VNIR": {
+        "R550": { "band_index": 5, "cwl_nm": 549, "fwhm_nm": 22.0, "approximate_match": false },
+        "R700": { "band_index": 16, "cwl_nm": 699, "fwhm_nm": 28.0, "approximate_match": false }
+      },
+      "Extended VNIR": {
+        "R550": { "band_index": 9, "cwl_nm": 550, "fwhm_nm": 19.3, "approximate_match": false },
+        "R700": { "band_index": 20, "cwl_nm": 700, "fwhm_nm": 24.5, "approximate_match": false }
+      }
+    },
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
+    "approximate_match": false,
+    "citations": [
+      { "paper": "Optical Properties and Nondestructive Estimation of Anthocyanin Content in Plant Leaves", "authors": "Gitelson A.A. et al. (2001)", "doi": "10.1562/0031-8655(2001)074<0038:OPANEO>2.0.CO;2", "link": null },
+      { "paper": "Index Database", "authors": null, "doi": null, "link": "https://www.indexdatabase.de/db/i-single.php?id=214" },
+      { "paper": "ENVI Leaf Pigment Indices", "authors": null, "doi": null, "link": "https://www.nv5geospatialsoftware.com/docs/leafpigments.html" }
+    ]
+  },
+  {
+    "name": "Anthocyanin Reflectance Index 2 (ARI2)",
+    "description": "Chlorophyll-normalized anthocyanin index using NIR multiplier to reduce impact of leaf thickness and density.",
+    "categories": ["vegetation"],
+    "keywords": ["anthocyanin", "pigments"],
+    "equation": "NIR * ((1 / R550) - (1 / R700))",
+    "latex_equation": "\\mathrm{NIR}(\\frac{1}{R_{550}} - \\frac{1}{R_{700}})",
+    "band_mappings": {
+      "Standard VNIR": {
+        "R550": { "band_index": 5, "cwl_nm": 549, "fwhm_nm": 22.0, "approximate_match": false },
+        "R700": { "band_index": 16, "cwl_nm": 699, "fwhm_nm": 28.0, "approximate_match": false },
+        "NIR": { "band_index": 23, "cwl_nm": 799, "fwhm_nm": 32.0, "approximate_match": false }
+      },
+      "Extended VNIR": {
+        "R550": { "band_index": 9, "cwl_nm": 550, "fwhm_nm": 19.3, "approximate_match": false },
+        "R700": { "band_index": 20, "cwl_nm": 700, "fwhm_nm": 24.5, "approximate_match": false },
+        "NIR": { "band_index": 27, "cwl_nm": 800, "fwhm_nm": 28.0, "approximate_match": false }
+      }
+    },
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
+    "approximate_match": false,
+    "citations": [
+      { "paper": "Optical Properties and Nondestructive Estimation of Anthocyanin Content in Plant Leaves", "authors": "Gitelson A.A. et al. (2001)", "doi": "10.1562/0031-8655(2001)074<0038:OPANEO>2.0.CO;2", "link": null },
+      { "paper": "Index Database", "authors": null, "doi": null, "link": "https://www.indexdatabase.de/db/i-single.php?id=215" },
+      { "paper": "ENVI Leaf Pigment Indices", "authors": null, "doi": null, "link": "https://www.nv5geospatialsoftware.com/docs/leafpigments.html" }
+    ]
+  },
+  {
+    "name": "Carotenoid Reflectance Index 1 (CRI1)",
+    "description": "Reciprocal difference emphasizing carotenoid absorption around 510 nm.",
+    "categories": ["vegetation"],
+    "keywords": ["carotenoids", "pigments"],
+    "equation": "(1 / R510) - (1 / R550)",
+    "latex_equation": "\\frac{1}{R_{510}} - \\frac{1}{R_{550}}",
+    "band_mappings": {
+      "Standard VNIR": {
+        "R510": { "band_index": 2, "cwl_nm": 510, "fwhm_nm": 20.4, "approximate_match": false },
+        "R550": { "band_index": 5, "cwl_nm": 549, "fwhm_nm": 22.0, "approximate_match": false }
+      },
+      "Extended VNIR": {
+        "R510": { "band_index": 6, "cwl_nm": 510, "fwhm_nm": 17.9, "approximate_match": false },
+        "R550": { "band_index": 9, "cwl_nm": 550, "fwhm_nm": 19.3, "approximate_match": false }
+      }
+    },
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
+    "approximate_match": false,
+    "citations": [
+      { "paper": "Assessing carotenoid content in plant leaves with reflectance spectroscopy", "authors": "Gitelson A.A. et al. (2002)", "doi": "10.1562/0031-8655(2002)075<0272:ACCIPL>2.0.CO;2", "link": null },
+      { "paper": "Index Database", "authors": null, "doi": null, "link": "https://www.indexdatabase.de/db/i-single.php?id=253" },
+      { "paper": "ENVI Leaf Pigment Indices", "authors": null, "doi": null, "link": "https://www.nv5geospatialsoftware.com/docs/leafpigments.html" }
+    ]
+  },
+  {
+    "name": "Carotenoid Reflectance Index 2 (CRI2)",
+    "description": "Carotenoid index combining green and red-edge reciprocal reflectances.",
+    "categories": ["vegetation"],
+    "keywords": ["carotenoids", "pigments"],
+    "equation": "(1 / R510) - (1 / R700)",
+    "latex_equation": "\\frac{1}{R_{510}} - \\frac{1}{R_{700}}",
+    "band_mappings": {
+      "Standard VNIR": {
+        "R510": { "band_index": 2, "cwl_nm": 510, "fwhm_nm": 20.4, "approximate_match": false },
+        "R700": { "band_index": 16, "cwl_nm": 699, "fwhm_nm": 28.0, "approximate_match": true }
+      },
+      "Extended VNIR": {
+        "R510": { "band_index": 6, "cwl_nm": 510, "fwhm_nm": 17.9, "approximate_match": false },
+        "R700": { "band_index": 20, "cwl_nm": 700, "fwhm_nm": 24.5, "approximate_match": false }
+      }
+    },
+    "compatible_satellites": ["Standard VNIR","Extended VNIR"],
+    "approximate_match": true,
+    "citations": [
+      { "paper": "Assessing carotenoid content in plant leaves with reflectance spectroscopy", "authors": "Gitelson A.A. et al. (2002)", "doi": "10.1562/0031-8655(2002)075<0272:ACCIPL>2.0.CO;2", "link": null },
+      { "paper": "Index Database", "authors": null, "doi": null, "link": "https://www.indexdatabase.de/db/i-single.php?id=253" },
+      { "paper": "ENVI Leaf Pigment Indices", "authors": null, "doi": null, "link": "https://www.nv5geospatialsoftware.com/docs/leafpigments.html" }
+    ]
+  }
+]
